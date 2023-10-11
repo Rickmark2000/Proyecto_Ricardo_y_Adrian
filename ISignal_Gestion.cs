@@ -13,7 +13,7 @@ namespace Proyecto_Ricardo_y_Adrian
         public bool add_signal(Signal signal);
         public void add_valuesToSignal(Signal signal);
         public void remove_signal(string name);
-        public void search_signal(string name);
+        public List<Signal> search_signal(string name);
         public void search_signal(Date date);
 
     }

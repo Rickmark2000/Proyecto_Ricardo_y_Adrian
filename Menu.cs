@@ -15,10 +15,10 @@ namespace Proyecto_Ricardo_y_Adrian
 
             do
             {
-                Console.WriteLine("\n~ 1) Crear nueva señal: \n" +
-                                    "~ 2) Añadir valores a señal: \n" +
-                                    "~ 3) Opcion3: \n" +
-
+                Console.WriteLine("\n~ 1) Create signal: \n" +
+                                    "~ 2) Add values: \n" +
+                                    "~ 3) Remove signal: \n" +
+                                    "~ 4) Search signal: \n" +
                                     "~ 0) Salir: \n");
 
                 opcion = Convert.ToInt32(Console.ReadLine());
@@ -38,6 +38,10 @@ namespace Proyecto_Ricardo_y_Adrian
                         break;
 
                     case 3:
+
+                        break;
+
+                    case 4:
 
                         break;
 

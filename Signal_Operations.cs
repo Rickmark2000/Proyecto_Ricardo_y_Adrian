@@ -17,5 +17,7 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             throw new NotImplementedException();
         }
+
+        // Los calculos de la humedad y temperatura con el patrón "Strategy"
     }
 }

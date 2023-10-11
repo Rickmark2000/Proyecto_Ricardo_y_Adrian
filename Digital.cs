@@ -93,7 +93,7 @@ namespace Proyecto_Ricardo_y_Adrian
             }
         }
 
-        public override void search_signal(string name)
+        public override List<Signal> search_signal(string name)
         {
             throw new NotImplementedException();
         }
