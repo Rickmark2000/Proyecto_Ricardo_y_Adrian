@@ -25,5 +25,10 @@ namespace Proyecto_Ricardo_y_Adrian
         public int Time { get => time; set => time = value; }
         public int Numeric_value { get => numeric_value; set => numeric_value = value; }
         internal Signal_Type Type_Signal { get => type_Signal; set => type_Signal = value; }
+
+        public override string ToString()
+        {
+            return $"Name: {name}, time: {time}, type: {type_Signal}, value: {numeric_value}";
+        }
     }
 }
