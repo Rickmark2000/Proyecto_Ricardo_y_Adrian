@@ -10,7 +10,7 @@ namespace Proyecto_Ricardo_y_Adrian
     {
         private string path;
 
-        public void save_signal()
+        public void save_signal(List<Signals> signals)
         {
             string p;
         }

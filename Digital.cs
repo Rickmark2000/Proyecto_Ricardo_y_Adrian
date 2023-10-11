@@ -15,7 +15,17 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public override bool add_signal(Signal signal)
         {
-            throw new NotImplementedException();
+
+            if(signal != null)
+            {
+                signals_list.Add(signal);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public override void add_valuesToSignal(Signal signal)
@@ -23,9 +33,23 @@ namespace Proyecto_Ricardo_y_Adrian
             throw new NotImplementedException();
         }
 
-        public override void create_signal()
+        public override bool create_signal(string name, int value)
         {
-            throw new NotImplementedException();
+            bool anadido = false;
+
+           signal = new Signal(name,23,Signal_Type.Digital,value);
+           status = signal.Numeric_value == 0 ? status=false : status = true;
+
+            if (add_signal(signal))
+            {
+                anadido = true;
+            }
+            else
+            {
+                anadido = false;
+            }
+
+            return anadido;
         }
 
         public override void remove_signal()

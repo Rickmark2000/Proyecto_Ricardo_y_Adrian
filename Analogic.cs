@@ -28,7 +28,7 @@ namespace Proyecto_Ricardo_y_Adrian
             throw new NotImplementedException();
         }
 
-        public override void create_signal()
+        public override bool create_signal(string name, int value)
         {
             throw new NotImplementedException();
         }
