@@ -12,7 +12,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public void save_signal()
         {
-
+            string p;
         }
 
         public List<Signals> charge_list()
