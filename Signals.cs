@@ -21,8 +21,9 @@ namespace Proyecto_Ricardo_y_Adrian
         public abstract void add_valuesToSignal(Signal signal);
         public abstract bool check_repeated(string name);
         public abstract bool create_signal(string name, int value);
-        public abstract void remove_signal();
+        public abstract void remove_signal(string name);
         public abstract void search_signal(string name);
         public abstract void search_signal(JSType.Date date);
+
     }
 }
