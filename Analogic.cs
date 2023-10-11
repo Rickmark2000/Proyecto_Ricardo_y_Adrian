@@ -18,7 +18,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public int Degrees { get => degrees; set => degrees = value; }
 
-        public override bool add_signal(Signal signal)
+        protected override bool add_signal(Signal signal)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace Proyecto_Ricardo_y_Adrian
             throw new NotImplementedException();
         }
 
-        public override void remove_signal()
+        public override void remove_signal(string name)
         {
             throw new NotImplementedException();
         }

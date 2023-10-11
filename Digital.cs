@@ -13,7 +13,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public bool Status { get => status; set => status = value; }
 
-        public override bool add_signal(Signal signal)
+        protected override bool add_signal(Signal signal)
         {
 
             if(signal != null)
@@ -52,9 +52,23 @@ namespace Proyecto_Ricardo_y_Adrian
             return anadido;
         }
 
-        public override void remove_signal()
+        public override void remove_signal(string name)
         {
-            throw new NotImplementedException();
+            int pos = 0;
+            bool find = false;
+
+            while(pos < signals_list.Count && !find) 
+            {
+                if (signals_list.ElementAt(pos).Name == name)
+                {
+                    signals_list.RemoveAt(pos);
+                    find = true;
+                }
+                else
+                {
+                    pos++;
+                }
+            }
         }
 
         public override void search_signal(string name)

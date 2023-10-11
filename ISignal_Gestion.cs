@@ -10,9 +10,9 @@ namespace Proyecto_Ricardo_y_Adrian
     public interface ISignal_Gestion
     {
         public bool create_signal(string name, int value);
-        public bool add_signal(Signal signal);
+        protected bool add_signal(Signal signal);
         public void add_valuesToSignal(Signal signal);
-        public void remove_signal();
+        public void remove_signal(string name);
         public void search_signal(string name);
         public void search_signal(Date date);
 
