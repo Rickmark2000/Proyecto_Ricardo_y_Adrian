@@ -13,7 +13,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public bool Status { get => status; set => status = value; }
 
-        protected override bool add_signal(Signal signal)
+        public override bool add_signal(Signal signal)
         {
 
             if(signal != null)
