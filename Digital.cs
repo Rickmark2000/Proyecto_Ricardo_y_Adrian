@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entregable_Ricardo_y_Adrian
+namespace Proyecto_Ricardo_y_Adrian
 {
     public class Digital : Signals
     {

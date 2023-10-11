@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entregable_Ricardo_y_Adrian
+namespace Proyecto_Ricardo_y_Adrian
 {
     public class Signal
     {
