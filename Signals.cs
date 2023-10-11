@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public abstract class Signals 
+    public abstract class Signals : ISignal_Gestion, ISignal_Check
     {
         protected List<Signal> signals_list;
         protected Signal signal;
@@ -17,11 +17,11 @@ namespace Proyecto_Ricardo_y_Adrian
             signals_list = new List<Signal>();
         }
 
-
-        protected abstract bool add_signal(Signal signal);
+        public abstract bool add_signal(Signal signal);
         public abstract void add_valuesToSignal(Signal signal);
+        public abstract bool check_repeated(string name);
         public abstract bool create_signal(string name, int value);
-        public abstract void remove_signal(string name);
+        public abstract void remove_signal();
         public abstract void search_signal(string name);
         public abstract void search_signal(JSType.Date date);
     }

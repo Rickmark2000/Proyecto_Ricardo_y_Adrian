@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public class File
+    public class Files
     {
-        private string path;
+        private string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\SignalRecords.txt";
+
 
         public void save_signal(List<Signals> signals)
         {
@@ -18,6 +19,11 @@ namespace Proyecto_Ricardo_y_Adrian
         public List<Signals> charge_list()
         {
             return new List<Signals>();
+        }
+
+        public void create_file()
+        {
+
         }
     }
 }

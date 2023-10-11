@@ -33,9 +33,31 @@ namespace Proyecto_Ricardo_y_Adrian
             throw new NotImplementedException();
         }
 
+        public override bool check_repeated(string name)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\SignalRecords.txt";
+
+            if (File.Exists(path))
+            {
+                string[] lineas = File.ReadAllLines(path);
+
+                foreach (string linea in lineas)
+                {
+                    if (linea.Contains($"{name}"))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
         public override bool create_signal(string name, int value)
         {
-            bool anadido = false;
+           bool anadido = false;
 
            signal = new Signal(name,23,Signal_Type.Digital,value);
            status = signal.Numeric_value == 0 ? status=false : status = true;

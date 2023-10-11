@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
@@ -26,6 +27,28 @@ namespace Proyecto_Ricardo_y_Adrian
         public override void add_valuesToSignal(Signal signal)
         {
             throw new NotImplementedException();
+        }
+
+        public override bool check_repeated(string name)
+        {
+            string path = " ";
+
+            if (File.Exists(path))
+            {
+                string[] lineas = File.ReadAllLines(path);
+
+                foreach (string linea in lineas)
+                {
+                    if (linea.Contains($"{name}"))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            return false;
         }
 
         public override bool create_signal(string name, int value)

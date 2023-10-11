@@ -15,8 +15,8 @@ namespace Proyecto_Ricardo_y_Adrian
 
             do
             {
-                Console.WriteLine("\n~ 1) Opcion1: \n" +
-                                    "~ 2) Opcion2: \n" +
+                Console.WriteLine("\n~ 1) Crear nueva señal: \n" +
+                                    "~ 2) Añadir valores a señal: \n" +
                                     "~ 3) Opcion3: \n" +
 
                                     "~ 0) Salir: \n");
