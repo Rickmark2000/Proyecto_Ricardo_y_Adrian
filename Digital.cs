@@ -28,9 +28,18 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
-        public override void add_valuesToSignal(Signal signal)
+        public override bool add_valuesToSignal(string name, int value)
         {
-            throw new NotImplementedException();
+            if (check_repeated(name))
+            {
+                string new_record = $"{name} {} {} {value}";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public override bool check_repeated(string name)
@@ -95,7 +104,20 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public override List<Signal> search_signal(string name)
         {
-            throw new NotImplementedException();
+            List<Signal> signal_data = new List<Signal>();
+
+            if (check_repeated(name))
+            {
+                // Llamada a file, retorna una Lista con los Datos de esta Señal "name".
+                // search_signal = esa lista.
+            }
+            else
+            {
+                signal_data = null;
+            }
+
+            return signal_data;
+
         }
 
         public override void search_signal(JSType.Date date)

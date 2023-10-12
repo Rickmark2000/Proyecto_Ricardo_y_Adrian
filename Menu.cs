@@ -8,10 +8,10 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Menu
     {
-        public void MenuOpciones()
+        public void OptionMenu()
         {
 
-            int opcion;
+            int choice;
 
             do
             {
@@ -21,9 +21,9 @@ namespace Proyecto_Ricardo_y_Adrian
                                     "~ 4) Search signal: \n" +
                                     "~ 0) Salir: \n");
 
-                opcion = Convert.ToInt32(Console.ReadLine());
+                choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (opcion)
+                switch (choice)
                 {
                     case 0:
 
@@ -47,7 +47,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 }
 
-            } while (opcion != 0);
+            } while (choice != 0);
         }
 
     }

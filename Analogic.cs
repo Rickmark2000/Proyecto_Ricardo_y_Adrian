@@ -19,48 +19,6 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public int Degrees { get => degrees; set => degrees = value; }
 
-        public override bool add_signal(Signal signal)
-        {
-
-            if (signal != null)
-            {
-                signals_list.Add(signal);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
-        public override void add_valuesToSignal(Signal signal)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool check_repeated(string name)
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\SignalRecords.txt";
-
-            if (File.Exists(path))
-            {
-                string[] lineas = File.ReadAllLines(path);
-
-                foreach (string linea in lineas)
-                {
-                    if (linea.Contains($"{name}"))
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            return false;
-        }
-
         public override bool create_signal(string name, int value)
         {
             bool anadido = false;
@@ -77,6 +35,57 @@ namespace Proyecto_Ricardo_y_Adrian
             }
 
             return anadido;
+        }
+
+        public override bool add_signal(Signal signal)
+        {
+
+            if (signal != null)
+            {
+                signals_list.Add(signal);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public override bool add_valuesToSignal(string name, int value)
+        {
+            if (check_repeated(name))
+            {
+                string new_record = $"{name} {} {} {value}";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public override bool check_repeated(string name)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\SignalRecords.txt";
+
+            if (File.Exists(path))
+            {
+                string[] lines = File.ReadAllLines(path);
+
+                foreach (string line in lines)
+                {
+                    if (line.Contains($"{name}"))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            return false;
         }
 
         public override void remove_signal(string name)
@@ -100,7 +109,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public override List<Signal> search_signal(string name)
         {
-            List<Signal> search_signal = new List<Signal>();
+            List<Signal> signal_data = new List<Signal>();
 
             if (check_repeated(name))
             {
@@ -109,10 +118,10 @@ namespace Proyecto_Ricardo_y_Adrian
             }
             else
             {
-                search_signal = null;
+                signal_data = null;
             }
 
-            return search_signal;
+            return signal_data;
 
         }
 

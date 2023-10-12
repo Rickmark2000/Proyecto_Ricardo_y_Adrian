@@ -18,7 +18,7 @@ namespace Proyecto_Ricardo_y_Adrian
         }
 
         public abstract bool add_signal(Signal signal);
-        public abstract void add_valuesToSignal(Signal signal);
+        public abstract bool add_valuesToSignal(string name, int value);
         public abstract bool check_repeated(string name);
         public abstract bool create_signal(string name, int value);
         public abstract void remove_signal(string name);
