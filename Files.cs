@@ -13,134 +13,142 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public void save_signal(List<Signal> signals)
         {
-            string p;
+            if (!File.Exists(path))
+            {
+                create_file(signals);
+            }
+            else
+            {
+                add_content(signals);
+            }
+        }
+
+        private void add_content(List<Signal> signals)
+        {
+            using (StreamWriter sw = File.AppendText(path))
+            {
+                foreach (Signal signal in signals)
+                {
+                    sw.WriteLine("Name:" + signal.Name
+                        + ",Type:" + signal.Type_Signal
+                        + ",Time:" + signal.Time
+                        + ",Value:" + signal.Numeric_value);
+                }
+            }
         }
 
         public List<Signal> charge_list()
         {
-            return new List<Signal>();
+            List<Signal> signal_support = new List<Signal>();
+
+            return signal_support;
         }
 
-        public void create_file(List<Signal> signals)
-        {
-            if (!File.Exists(path))
-            {
-                file_content(signals);
-            }
-            else
-            {
-                File.Delete(path);
-                file_content(signals);
-            }
-        }
 
-        private void file_content(List<Signal> signals)
+        private void create_file(List<Signal> signals)
         {
-            int position = 0;
-
             using (StreamWriter sw = File.CreateText(path))
             {
-                foreach (Signal signal in signals) { }
+                foreach (Signal signal in signals)
                 {
-                    if (palabras[i] != null)
                     {
-                        sw.WriteLine("ID: " + signals.ElementAt(position).Name
-                        + " ,Palabra: " + signals.ElementAt(position).Type_Signal
-                        + " ,Nivel: " + signals.ElementAt(position).Time);
+                        sw.WriteLine("Name:" + signal.Name
+                        + ",Type:" + signal.Type_Signal
+                        + ",Time:" + signal.Time
+                        + ",Value:" + signal.Numeric_value);
                     }
-                    position++;
                 }
-                Console.WriteLine("Fichero creado");
+            }
+        }
+            private List<string> read_file()
+            {
+                List<string> signals_read = new List<string>();
+                string read = "";
 
+                if (File.Exists(path))
+                {
+                    using (StreamReader sr = File.OpenText(path))
+                    {
+                        while ((read = sr.ReadLine()) != null)
+                        {
+                            signals_read.Add(read);
+                        }
+                    }
+                }
+
+                return signals_read;
             }
 
-        }
 
-        public void mostrar_archivo(string nombre_fichero)
-        {
-            int posicion = 0;
-            ruta_archivo = @"C:\Users\ricardsanchez\Desktop\" + nombre_fichero;
 
-            if (File.Exists(ruta_archivo))
+            void guardar_palabras()
             {
                 using (StreamReader sr = File.OpenText(ruta_archivo))
                 {
-                    string leer;
+                    string leer, palabra = "";
+                    //cont se usa para incrementar individualmente el array donde se almacenan los coches
+                    int posicion = 0, id = 0, nivel = 0, cont = 0;
+
                     while ((leer = sr.ReadLine()) != null)
                     {
+                        contenido_archivo[posicion] = leer;
+                        separador_datos = contenido_archivo[posicion].Split(" ");
+                        //como se usa un split se prepara el for para que solo se almacenen en variables
+                        //los datos buscados
+                        for (int i = 1; i < separador_datos.Length; i += 8)
+                        {
+                            id = Convert.ToInt32(separador_datos[i]);
+                            palabra = separador_datos[i + 2];
+                            nivel = Convert.ToInt32(separador_datos[i + 4]);
+
+                            almacenar_palabras[cont] = new Palabra(palabra, id, nivel);
+                            cont++;
+                        }
                         posicion++;
-                        Console.WriteLine(leer);
                     }
-                    almacenar_palabras = new Palabra[posicion];
-                    contenido_archivo = new string[posicion];
+
                 }
             }
-            else
+
+            public Palabra[] cargar_archivo(string nombreFichero)
             {
-                Console.WriteLine("¡NO EXISTE ARCHIVO PARA LEER!");
-            }
+                char[] delimiterChars = { ' ', ',', '.', ':' };
 
-        }
+                string text = "one:ttwo,three:four,five six seven";
+                System.Console.WriteLine($"Original text: '{text}'");
 
-        int posicion = 0, anio = 0, ruedas = 0, cont = 0;
+                string[] words = text.Split(delimiterChars);
+                System.Console.WriteLine($"{words.Length} words in text:");
 
-
-
-        private void guardar_palabras()
-        {
-            using (StreamReader sr = File.OpenText(ruta_archivo))
-            {
-                string leer, palabra = "";
-                //cont se usa para incrementar individualmente el array donde se almacenan los coches
-                int posicion = 0, id = 0, nivel = 0, cont = 0;
-
-                while ((leer = sr.ReadLine()) != null)
+                foreach (var word in words)
                 {
-                    contenido_archivo[posicion] = leer;
-                    separador_datos = contenido_archivo[posicion].Split(" ");
-                    //como se usa un split se prepara el for para que solo se almacenen en variables
-                    //los datos buscados
-                    for (int i = 1; i < separador_datos.Length; i += 8)
-                    {
-                        id = Convert.ToInt32(separador_datos[i]);
-                        palabra = separador_datos[i + 2];
-                        nivel = Convert.ToInt32(separador_datos[i + 4]);
+                    System.Console.WriteLine($"<{word}>");
+                }
+                read_file(nombreFichero);
+                guardar_palabras();
 
-                        almacenar_palabras[cont] = new Palabra(palabra, id, nivel);
-                        cont++;
-                    }
-                    posicion++;
+
+                return almacenar_palabras;
+            }
+
+            public void borrar_fichero(string nombreFichero, Palabra[] palabras)
+            {
+                ruta_archivo = @"C:\Users\ricardsanchez\Desktop\" + nombreFichero;
+
+                if (File.Exists(ruta_archivo))
+                {
+                    File.Delete(ruta_archivo);
+                    Console.WriteLine("Introduce el nombre del nuevo fichero");
+                    nombreFichero = Console.ReadLine();
+                    generar_fichero(nombreFichero, palabras);
+                }
+                else
+                {
+                    Console.WriteLine("¡NO EXISTE ARCHIVO PARA BORRAR!");
                 }
 
+
             }
-        }
-
-        public Palabra[] cargar_archivo(string nombreFichero)
-        {
-            mostrar_archivo(nombreFichero);
-            guardar_palabras();
-
-
-            return almacenar_palabras;
-        }
-
-        public void borrar_fichero(string nombreFichero, Palabra[] palabras)
-        {
-            ruta_archivo = @"C:\Users\ricardsanchez\Desktop\" + nombreFichero;
-
-            if (File.Exists(ruta_archivo))
-            {
-                File.Delete(ruta_archivo);
-                Console.WriteLine("Introduce el nombre del nuevo fichero");
-                nombreFichero = Console.ReadLine();
-                generar_fichero(nombreFichero, palabras);
-            }
-            else
-            {
-                Console.WriteLine("¡NO EXISTE ARCHIVO PARA BORRAR!");
-            }
-
-
-        }
     }
 }
+
