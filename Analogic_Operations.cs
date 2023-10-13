@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public class Signal_Operations : ISignal_Operations
+    public class Analogic_Operations : ISignal_Operations
     {
         public void average_values()
         {
@@ -17,7 +17,5 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             throw new NotImplementedException();
         }
-        //necesario patron para los calculos
-        // Los calculos de la humedad y temperatura con el patrón "Strategy"
     }
 }

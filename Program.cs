@@ -16,6 +16,15 @@ namespace Proyecto_Ricardo_y_Adrian
             // por lo que el resto de métodos de esa clase deben estar en privados
             string fechaActual = DateTime.UtcNow.ToString("dd-MM-yyyy/HH-mm-ss");
 
+
+            Analogic_Signal s = new Analogic_Signal(Analogic_Value_Type.Degrees);
+
+            s.create_signal("ssda", 2);
+
+            s.Operation.DoOperation();
+
+   
+
         }
 
     }

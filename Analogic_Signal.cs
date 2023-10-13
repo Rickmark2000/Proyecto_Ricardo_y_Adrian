@@ -14,6 +14,11 @@ namespace Proyecto_Ricardo_y_Adrian
         //y dependiendo de un tipo de valor u otro que el valor cambie
         private Analogic_Value_Type anaalogic_type;
 
+        public Analogic_Signal(Analogic_Value_Type type)
+        {
+            this.anaalogic_type = type;
+        }
+
         public Analogic_Value_Type Anaalogic_type { get => anaalogic_type; set => anaalogic_type = value; }
 
         public override bool create_signal(string name, int value)
