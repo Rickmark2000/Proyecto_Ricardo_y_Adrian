@@ -9,7 +9,7 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Digital_Signal : Signals
     {
-        //hay que controlar que si el status es 1 el valor sera false y que si el valor sera 0 es verdadero
+
         private bool status;
 
         public bool Status { get => status; set => status = value; }
@@ -18,10 +18,12 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             bool created = false;
 
-            if (!check_repeated(name))
+            if (!check_repeated(name) && check_status(value))
             {
                 //comprobacion de si es 1 o 0 para determinar verdadero o falso
                 signal = new Signal(name, DateTime.UtcNow, Signal_Type.Digital, value);
+                Status = value == 0 ? false : true;
+
 
                 if (add_signal(signal))
                 {
@@ -42,13 +44,15 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
-        //¿usar tipo aqui para saber que valores añadir?
         public override bool add_valuesToSignal(string name, int value)
         {
-            if (check_repeated(name))
+            if (check_repeated(name) && check_status(value))
             {
-                Signal new_record = new Signal(name, DateTime.UtcNow, Signal_Type.Digital, value);
-                files_management.save_signal(new_record);
+                Signal new_record = search_signal(name);
+                new_record.Time = DateTime.UtcNow;
+                new_record.Numeric_value = value;
+                remove_signal(name);
+                add_signal(new_record);
                 return true;
             }
             else
@@ -56,6 +60,22 @@ namespace Proyecto_Ricardo_y_Adrian
                 return false;
             }
 
+        }
+
+        private bool check_status(int value)
+        {
+            bool alright;
+
+            if (value == 0 || value == 1)
+            {
+                alright = true;
+            }
+            else
+            {
+                alright = false;
+            }
+
+            return alright;
         }
 
     }
