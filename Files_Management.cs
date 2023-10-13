@@ -214,6 +214,32 @@ namespace Proyecto_Ricardo_y_Adrian
 
             return signals_read;
         }
+
+        public List<Signal> remove_signals(string name)
+        {
+            List<Signal> file_content = charge_list();
+            
+            foreach (Signal signal in file_content) 
+            { 
+                if (signal.Name == name)
+                {
+                    file_content.Remove(signal);
+                }
+            
+            }
+            overWrite_file(file_content);
+            return file_content;
+        }
+
+        private void overWrite_file(List<Signal> signals)
+        {
+            if(File.Exists(file_Management.Path))
+            {
+                File.Delete(file_Management.Path);
+            }
+
+            create_file(signals);
+        }
     }
 }
 
