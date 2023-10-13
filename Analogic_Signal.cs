@@ -14,10 +14,6 @@ namespace Proyecto_Ricardo_y_Adrian
         //y dependiendo de un tipo de valor u otro que el valor cambie
         private Analogic_Value_Type anaalogic_type;
 
-        public Analogic_Signal(Analogic_Value_Type type)
-        {
-            this.anaalogic_type = type;
-        }
 
         public Analogic_Value_Type Anaalogic_type { get => anaalogic_type; set => anaalogic_type = value; }
 
@@ -28,10 +24,11 @@ namespace Proyecto_Ricardo_y_Adrian
             if (!check_repeated(name))
             {
 
-                signal = new Signal(name, DateTime.UtcNow, Signal_Type.Digital, value);
+                signal = new Signal(name, DateTime.UtcNow, Signal_Type.Analogic, value);
 
                 if (add_signal(signal))
                 {
+                    files_management.save_signal(signal);
                     created = true;
                 }
                 else
@@ -53,8 +50,12 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             if (check_repeated(name))
             {
-                Signal new_record = new Signal(name, DateTime.UtcNow, Signal_Type.Digital, value);
-                files_management.save_signal(new_record);
+                Signal new_record = search_signal(name);
+                new_record.Time = DateTime.UtcNow;
+                new_record.Numeric_value = value;
+                remove_signal(name);
+                add_signal(new_record);
+                files_management.save_signal(signal);
                 return true;
             }
             else

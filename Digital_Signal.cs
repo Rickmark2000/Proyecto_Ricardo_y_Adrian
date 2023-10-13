@@ -27,6 +27,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 if (add_signal(signal))
                 {
+                    files_management.save_signal(signal);
                     created = true;
                 }
                 else
@@ -53,6 +54,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 new_record.Numeric_value = value;
                 remove_signal(name);
                 add_signal(new_record);
+                files_management.save_signal(signal);
                 return true;
             }
             else
