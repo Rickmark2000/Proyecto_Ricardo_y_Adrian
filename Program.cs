@@ -11,6 +11,9 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public static void Main(string[] args)
         {
+            // aqui para pruebas de cosas sueltas que queramos probar 
+            //aqui solo se llamara a la clase menu al metodo menu_option
+            // por lo que el resto de métodos de esa clase deben estar en privados
             string fechaActual = DateTime.UtcNow.ToString("dd-MM-yyyy/HH-mm-ss");
 
         }

@@ -9,10 +9,12 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Anaalogic : Signals
     {
-        private bool status;
-        private string srt;
+        //nos va a servir para saber el tipo de calculo que haremos en operations
+        // igual nos vendría bien una sobrecarga del constructor signal para añadir el tipo de valor
+        //y dependiendo de un tipo de valor u otro que el valor cambie
+        private Anaalogic_Value_Type anaalogic_type;
 
-        public bool Status { get => status; set => status = value; }
+        public Anaalogic_Value_Type Anaalogic_type { get => anaalogic_type; set => anaalogic_type = value; }
 
         public override bool create_signal(string name, int value)
         {

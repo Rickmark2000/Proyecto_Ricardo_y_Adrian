@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public class Files_Management
+    public class Files_Management:IFiles_Management
     {
+        //vendria bien optimizar los métodos de carga
         private File_Management file_Management;
 
         public Files_Management()
@@ -64,6 +65,7 @@ namespace Proyecto_Ricardo_y_Adrian
             }
         }
 
+        //seguro que estos 3 métodos se pueden optimizar
         public List<Signal> charge_list()
         {
             List<Signal> signal_storage = new List<Signal>();
@@ -88,7 +90,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 signal_name = words[0];
 
                 type = words[1] == "Analogic"? Signal_Type.Analogic : Signal_Type.Digital;
-                time = file_Management.Time.create_time(words[2]);
+                time = file_Management.Date_Management.create_date(words[2]);
                 value = Convert.ToInt32(words[3]);
 
                 signal_support = new Signal(signal_name,time,type,value);
@@ -123,7 +125,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 if(search_name == signal_name)
                 {
                     type = words[1] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
-                    time = file_Management.Time.create_time(words[2]);
+                    time = file_Management.Date_Management.create_date(words[2]);
                     value = Convert.ToInt32(words[3]);
 
                     signal_support = new Signal(signal_name, time, type, value);
@@ -155,9 +157,9 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 signal_name = words[0];
                 type = words[1] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
-                time = file_Management.Time.create_time(words[2]);
+                time = file_Management.Date_Management.create_date(words[2]);
 
-                if (file_Management.Time.check_times(time_search,time))
+                if (file_Management.Date_Management.check_dates(time_search,time))
                 {
                     value = Convert.ToInt32(words[3]);
 
@@ -226,6 +228,27 @@ namespace Proyecto_Ricardo_y_Adrian
                     file_content.Remove(signal);
                 }
             
+            }
+            overWrite_file(file_content);
+            return file_content;
+        }
+
+        public List<Signal> remove_signals(DateTime time_delete)
+        {
+            List<Signal> file_content = charge_list();
+            List<Signal> signals = charge_list(time_delete);
+
+            foreach (Signal signal in file_content)
+            {
+                foreach(Signal signal_time in signals)
+                {
+                    if (file_Management.Date_Management.check_dates(signal.Time,signal_time.Time))
+                    {
+                        file_content.Remove(signal);
+                    }
+                }
+              
+
             }
             overWrite_file(file_content);
             return file_content;

@@ -14,7 +14,7 @@ namespace Proyecto_Ricardo_y_Adrian
         public bool add_valuesToSignal(string name, int value);
         public void remove_signal(string name);
         public List<Signal> search_signal(string name);
-        public void search_signal(Date date);
+        public void search_signal(DateTime date);
 
     }
 }

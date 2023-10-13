@@ -13,6 +13,8 @@ namespace Proyecto_Ricardo_y_Adrian
         private Signal_Type type_Signal;
         private int numeric_value;
 
+        //¿sobrecarga del método para aceptar distintas posibilidades?
+
         public Signal(string name, DateTime time, Signal_Type type_Signal, int numeric_value)
         {
             this.name = name;
@@ -26,6 +28,8 @@ namespace Proyecto_Ricardo_y_Adrian
         public int Numeric_value { get => numeric_value; set => numeric_value = value; }
         internal Signal_Type Type_Signal { get => type_Signal; set => type_Signal = value; }
 
+        //¿Implementar equals?
+        //usar to string para mostrar los datos de una señal
         public override string ToString()
         {
             return $"Name: {name}, time: {time}, type: {type_Signal}, value: {numeric_value}";
