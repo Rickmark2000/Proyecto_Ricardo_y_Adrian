@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public class Files_Management:IFiles_Management
+    public class Files_Management : IFiles_Management
     {
         //vendria bien optimizar los métodos de carga
         private File_Management file_Management;
@@ -277,9 +277,38 @@ namespace Proyecto_Ricardo_y_Adrian
 
             create_file(signals);
         }
+
+
         #endregion
 
+        public bool check_repeated(string name)
+        {
+            string[] lines;
+            bool find = false;
 
+            if (File.Exists(file_Management.Path))
+            {
+                lines = File.ReadAllLines(file_Management.Path);
+
+                foreach (string line in lines)
+                {
+                    if (line.Contains($"{name}"))
+                    {
+                       find = true;
+                    }
+                    else
+                    {
+                        find = false;
+                    }
+                }
+            }
+            else
+            {
+                find = false;
+            }
+
+            return find;
+        }
     }
 }
 

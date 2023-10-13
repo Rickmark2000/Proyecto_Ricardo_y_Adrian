@@ -16,5 +16,6 @@ namespace Proyecto_Ricardo_y_Adrian
         public List<Signal> remove_signals(string name);
         public List<Signal> remove_signals(DateTime time_delete);
 
+        public bool check_repeated(string name);
     }
 }
