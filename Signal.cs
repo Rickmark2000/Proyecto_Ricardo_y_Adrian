@@ -15,6 +15,16 @@ namespace Proyecto_Ricardo_y_Adrian
 
         //¿sobrecarga del método para aceptar distintas posibilidades?
 
+        public Signal(string name)
+        {
+            this.name = name;
+        }
+        public Signal(string name, int numeric_value)
+        {
+            this.name = name;
+            this.numeric_value = numeric_value;
+        }
+
         public Signal(string name, DateTime time, Signal_Type type_Signal, int numeric_value)
         {
             this.name = name;
@@ -28,11 +38,15 @@ namespace Proyecto_Ricardo_y_Adrian
         public int Numeric_value { get => numeric_value; set => numeric_value = value; }
         internal Signal_Type Type_Signal { get => type_Signal; set => type_Signal = value; }
 
-        //¿Implementar equals?
-        //usar to string para mostrar los datos de una señal
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
         public override string ToString()
         {
             return $"Name: {name}, time: {time}, type: {type_Signal}, value: {numeric_value}";
         }
+
     }
 }
