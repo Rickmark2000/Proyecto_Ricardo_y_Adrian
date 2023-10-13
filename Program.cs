@@ -11,8 +11,9 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public static void Main(string[] args)
         {
-            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop).Concat(""));
+            string fechaActual = DateTime.UtcNow.ToString("dd-MM-yyyy/HH-mm-ss");
 
         }
+
     }
 }
