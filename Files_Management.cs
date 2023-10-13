@@ -82,6 +82,7 @@ namespace Proyecto_Ricardo_y_Adrian
             
             foreach(string content_file in content)
             {
+
                 words = content_file.Split(delimiterChars);
 
                 signal_name = words[0];

@@ -15,6 +15,7 @@ namespace Proyecto_Ricardo_y_Adrian
         public Signals()
         {
             signals_list = new List<Signal>();
+
         }
 
         public abstract bool add_signal(Signal signal);

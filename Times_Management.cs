@@ -29,10 +29,19 @@ namespace Proyecto_Ricardo_y_Adrian
             return actual_time;
         }
 
-        public bool check_times(DateTime time1, DateTime time2)
+        public bool check_times(DateTime time_search, DateTime time)
         {
+            bool check = false;
+            if((time_search.Year == time.Year)&&(time_search.Month == time.Month)&&(time_search.Day == time.Day)) 
+            { 
+                check = true;
+            }
+            else
+            {
+                check = false;
+            }
 
-            return false;
+            return check;
         }
     }
 }
