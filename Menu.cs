@@ -42,33 +42,52 @@ namespace Proyecto_Ricardo_y_Adrian
          * Usar el equals
          * Cualquier idea que se nos ocurra hacer un comentario de ella donde corresponda
          */
+
+        private List<Signals> signals_list;
+        private List<Signal> signal_list;
+        private Digital_Signal digital;
+        private Analogic_Signal analogic;
+        private Files_Management files;
+        private Operation operation;
+        private Signals signals_class;
+
+        public Menu()
+        {
+            signals_list = new List<Signals>();
+            signal_list = new List<Signal>();
+            digital = new Digital_Signal();
+            analogic = new Analogic_Signal();
+
+        }
         public void OptionMenu()
         {
-
+            
             int choice;
 
             do
             {
                 Console.WriteLine("\n~ 1) Create signal: \n" +
-                                    "~ 2) Add values: \n" +
-                                    "~ 3) Remove signal: \n" +
-                                    "~ 4) Search signal: \n" +
-                                    "~ 0) Salir: \n");
+                                    "~ 2) Add values to signal: \n" +
+                                    "~ 3) aaa: \n" +
+                                    "~ 4) aaa: \n" +
+                                    "~ 0) Exit: \n");
 
                 choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
                 {
                     case 0:
-
+                        Console.WriteLine("The program has ended.");
                         break;
 
                     case 1:
 
+                        create_signal();
                         break;
 
                     case 2:
 
+                        add_values_to_signal();
                         break;
 
                     case 3:
@@ -82,6 +101,79 @@ namespace Proyecto_Ricardo_y_Adrian
                 }
 
             } while (choice != 0);
+
+        }
+
+        private void create_signal()
+        {
+            int type = 0;
+            string name = "";
+            int value = 0;
+            bool created = false;
+
+            Console.WriteLine("Choose a Type to create the signal: \n" +
+                            "~1) Analog \n" +
+                            "~2) Digital \n");
+
+            try
+            {
+                type = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Write the signal's Name: ");
+                name = Console.ReadLine();
+                Console.WriteLine("Write the signal's Value: ");
+                value = Convert.ToInt32(Console.ReadLine());
+
+                if (type == 1)
+                {
+                    if(analogic.create_signal(name, value))
+                    {
+                        created = true;
+                        signal_list.Add(analogic.search_signal(name));
+                        
+                    }
+                    else
+                    {
+                        created = false;
+                    }
+
+
+                }
+                else if (type == 2)
+                {
+                    if (digital.create_signal(name, value))
+                    {
+                        created = true;
+                        signal_list.Add(digital.search_signal(name));
+                    }
+                    else
+                    {
+                        created = false;
+                    }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Wrong value, try again: ");
+                    create_signal();
+                }
+
+                if (!created)
+                {
+                    Console.WriteLine("Error creating, try again.");
+                    create_signal();
+                }
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+                create_signal();
+            }
+
+            
+        }
+        private void add_values_to_signal()
+        {
+
         }
 
     }

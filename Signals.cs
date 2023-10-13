@@ -10,7 +10,7 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public abstract class Signals : ISignal_Gestion, ISignal_Check
     {
-        protected List<Signal> signals_list;
+        private List<Signal> signals_list;
         protected Signal signal;
         protected File_Management file_management;
         protected Files_Management files_management;
@@ -21,6 +21,8 @@ namespace Proyecto_Ricardo_y_Adrian
             file_management = new File_Management();
             files_management = new Files_Management();
         }
+        public List<Signal> Signals_list { get => signals_list; private set => signals_list = value; }
+
 
         public bool add_signal(Signal signal)
         {
