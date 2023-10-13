@@ -15,7 +15,13 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             file_Management = new File_Management();
         }
-
+        /*
+         * el region nos vendria bien para poder acceder mejor al código
+         * #region "----------------NOMBRE DE LA REGION---------------"
+         * Contenido
+         * #endregion
+         */
+        #region "--------------------SAVE SIGNAL--------------------"
         public void save_signal(List<Signal> signals)
         {
             if (!File.Exists(file_Management.Path))
@@ -64,8 +70,11 @@ namespace Proyecto_Ricardo_y_Adrian
                 }
             }
         }
+        #endregion
+
 
         //seguro que estos 3 métodos se pueden optimizar
+        #region "-----------------CHARGE LIST----------------------------"
         public List<Signal> charge_list()
         {
             List<Signal> signal_storage = new List<Signal>();
@@ -81,22 +90,22 @@ namespace Proyecto_Ricardo_y_Adrian
             content = read_file();
 
             words = new string[content.Count];
-            
-            foreach(string content_file in content)
+
+            foreach (string content_file in content)
             {
 
                 words = content_file.Split(delimiterChars);
 
                 signal_name = words[0];
 
-                type = words[1] == "Analogic"? Signal_Type.Analogic : Signal_Type.Digital;
+                type = words[1] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
                 time = file_Management.Date_Management.create_date(words[2]);
                 value = Convert.ToInt32(words[3]);
 
-                signal_support = new Signal(signal_name,time,type,value);
+                signal_support = new Signal(signal_name, time, type, value);
                 signal_storage.Add(signal_support);
             }
-           
+
             return signal_storage;
         }
 
@@ -122,7 +131,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 signal_name = words[0];
 
-                if(search_name == signal_name)
+                if (search_name == signal_name)
                 {
                     type = words[1] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
                     time = file_Management.Date_Management.create_date(words[2]);
@@ -159,7 +168,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 type = words[1] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
                 time = file_Management.Date_Management.create_date(words[2]);
 
-                if (file_Management.Date_Management.check_dates(time_search,time))
+                if (file_Management.Date_Management.check_dates(time_search, time))
                 {
                     value = Convert.ToInt32(words[3]);
 
@@ -169,8 +178,10 @@ namespace Proyecto_Ricardo_y_Adrian
             }
             return signal_storage;
         }
+        #endregion
 
 
+        #region "-------------CREATE FILE------------------"
         private void create_file(List<Signal> signals)
         {
             using (StreamWriter sw = File.CreateText(file_Management.Path))
@@ -190,13 +201,15 @@ namespace Proyecto_Ricardo_y_Adrian
         private void create_file(Signal signal)
         {
             using (StreamWriter sw = File.CreateText(file_Management.Path))
-            {                 
+            {
                 sw.WriteLine("Name:" + signal.Name
                 + ",Type:" + signal.Type_Signal
                 + ",Time:" + signal.Time
-                + ",Value:" + signal.Numeric_value); 
+                + ",Value:" + signal.Numeric_value);
             }
         }
+        #endregion
+
 
         private List<string> read_file()
         {
@@ -217,17 +230,18 @@ namespace Proyecto_Ricardo_y_Adrian
             return signals_read;
         }
 
+        #region "------------REMOVE SIGNAL-------------------"
         public List<Signal> remove_signals(string name)
         {
             List<Signal> file_content = charge_list();
-            
-            foreach (Signal signal in file_content) 
-            { 
+
+            foreach (Signal signal in file_content)
+            {
                 if (signal.Name == name)
                 {
                     file_content.Remove(signal);
                 }
-            
+
             }
             overWrite_file(file_content);
             return file_content;
@@ -240,14 +254,14 @@ namespace Proyecto_Ricardo_y_Adrian
 
             foreach (Signal signal in file_content)
             {
-                foreach(Signal signal_time in signals)
+                foreach (Signal signal_time in signals)
                 {
-                    if (file_Management.Date_Management.check_dates(signal.Time,signal_time.Time))
+                    if (file_Management.Date_Management.check_dates(signal.Time, signal_time.Time))
                     {
                         file_content.Remove(signal);
                     }
                 }
-              
+
 
             }
             overWrite_file(file_content);
@@ -256,13 +270,16 @@ namespace Proyecto_Ricardo_y_Adrian
 
         private void overWrite_file(List<Signal> signals)
         {
-            if(File.Exists(file_Management.Path))
+            if (File.Exists(file_Management.Path))
             {
                 File.Delete(file_Management.Path);
             }
 
             create_file(signals);
         }
+        #endregion
+
+
     }
 }
 
