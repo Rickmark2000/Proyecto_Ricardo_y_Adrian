@@ -17,6 +17,8 @@ namespace Proyecto_Ricardo_y_Adrian
         public Signals()
         {
             signals_list = new List<Signal>();
+            file_management = new File_Management();
+            files_management = new Files_Management();
         }
 
         public bool add_signal(Signal signal)
