@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public class Anaalogic : Signals
+    public class Digital_Signal : Signals
     {
-        //nos va a servir para saber el tipo de calculo que haremos en operations
-        // igual nos vendría bien una sobrecarga del constructor signal para añadir el tipo de valor
-        //y dependiendo de un tipo de valor u otro que el valor cambie
-        private Anaalogic_Value_Type anaalogic_type;
+        //hay que controlar que si el status es 1 el valor sera false y que si el valor sera 0 es verdadero
+        private bool status;
 
-        public Anaalogic_Value_Type Anaalogic_type { get => anaalogic_type; set => anaalogic_type = value; }
+        public bool Status { get => status; set => status = value; }
 
         public override bool create_signal(string name, int value)
         {
@@ -22,7 +20,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
             if (!check_repeated(name))
             {
-
+                //comprobacion de si es 1 o 0 para determinar verdadero o falso
                 signal = new Signal(name, DateTime.UtcNow, Signal_Type.Digital, value);
 
                 if (add_signal(signal))
@@ -44,6 +42,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        //¿usar tipo aqui para saber que valores añadir?
         public override bool add_valuesToSignal(string name, int value)
         {
             if (check_repeated(name))
@@ -61,4 +60,3 @@ namespace Proyecto_Ricardo_y_Adrian
 
     }
 }
-
