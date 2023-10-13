@@ -13,6 +13,34 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public bool Status { get => status; set => status = value; }
 
+        public override bool create_signal(string name, int value)
+        {
+            bool created = false;
+
+            if (!check_repeated(name))
+            {
+
+                signal = new Signal(name, DateTime.UtcNow, Signal_Type.Digital, value);
+
+                if (add_signal(signal))
+                {
+                    created = true;
+                }
+                else
+                {
+                    created = false;
+                }
+
+            }
+            else
+            {
+                created = false;
+            }
+
+            return created;
+
+        }
+
         public override bool add_signal(Signal signal)
         {
 
@@ -32,7 +60,8 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             if (check_repeated(name))
             {
-                string new_record = $"{name} {} {} {value}";
+                Signal new_record = new Signal(name, DateTime.UtcNow, Signal_Type.Analogic, value);
+                files.save_signal(new_record);
                 return true;
             }
             else
@@ -44,15 +73,14 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public override bool check_repeated(string name)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\SignalRecords.txt";
 
-            if (File.Exists(path))
+            if (File.Exists(File_Management.path))
             {
-                string[] lineas = File.ReadAllLines(path);
+                string[] lines = File.ReadAllLines(File_Management.path);
 
-                foreach (string linea in lineas)
+                foreach (string line in lines)
                 {
-                    if (linea.Contains($"{name}"))
+                    if (line.Contains($"{name}"))
                     {
                         return true;
                     }
@@ -64,24 +92,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return false;
         }
 
-        public override bool create_signal(string name, int value)
-        {
-           bool anadido = false;
-
-           signal = new Signal(name,23,Signal_Type.Digital,value);
-           status = signal.Numeric_value == 0 ? status=false : status = true;
-
-            if (add_signal(signal))
-            {
-                anadido = true;
-            }
-            else
-            {
-                anadido = false;
-            }
-
-            return anadido;
-        }
+        
 
         public override void remove_signal(string name)
         {

@@ -11,6 +11,7 @@ namespace Proyecto_Ricardo_y_Adrian
     {
         protected List<Signal> signals_list;
         protected Signal signal;
+        protected Files files = new Files();
 
         public Signals()
         {
