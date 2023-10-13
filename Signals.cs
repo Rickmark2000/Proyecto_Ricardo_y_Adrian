@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,24 +46,17 @@ namespace Proyecto_Ricardo_y_Adrian
         public bool check_repeated(string name)
         {
 
-            if (File.Exists(file_management.Path))
+            foreach (Signal signal in signals_list)
             {
-                string[] lines = File.ReadAllLines(file_management.Path);
-
-                foreach (string line in lines)
+                if (signal.Name == name)
                 {
-                    if (line.Contains($"{name}"))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-
-                return false;
             }
 
             return false;
         }
-       
+
         public void remove_signal(string name)
         {
             int pos = 0;
@@ -82,34 +76,50 @@ namespace Proyecto_Ricardo_y_Adrian
             }
         }
         //para mostrar algo en el program usar.toString() de la clase signal
-        public List<Signal> search_signal(string name)
+        public Signal search_signal(string name)
         {
             /*
              * Decidamos si buscar en la lista o el fichero, sera importante type_use
              */
-            List<Signal> signal_data = new List<Signal>();
+            Signal signal_found = null;
 
             if (check_repeated(name))
             {
+
+                foreach (Signal signal in signals_list)
+                {
+                    if (signal.Name == name)
+                    {
+                        signal_found = signal;
+                    }
+                }
                 // Llamada a file, retorna una Lista con los Datos de esta Señal "name".
                 // search_signal = esa lista.
-            }
-            else
-            {
-                signal_data = null;
-            }
 
-            return signal_data;
-
+            }
+            return signal_found;
         }
 
         //para mostrar algo en el program usar.toString() de la clase signal
-        public void search_signal(DateTime date)
+        public List<Signal> search_signal(DateTime date)
         {
+            List<Signal> list_found = new List<Signal>();
+
+            foreach(Signal signal in signals_list)
+            {
+                if((signal.Time.Year == date.Year) && (signal.Time.Month == date.Month) && (signal.Time.Day == date.Day))
+                {
+                    list_found.Add(signal);
+                }
+            }
+
+            return list_found;
+
             /*
              * Importante el type_use para decidir que hacer en caso de fichero o lista
              * 
              */
+          
         }
 
         public abstract bool create_signal(string name, int value);
