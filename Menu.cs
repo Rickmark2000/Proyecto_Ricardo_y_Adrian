@@ -57,6 +57,7 @@ namespace Proyecto_Ricardo_y_Adrian
             signal_list = new List<Signal>();
             digital = new Digital_Signal();
             analogic = new Analogic_Signal();
+            files = new Files_Management();
 
         }
         public void OptionMenu()
@@ -67,9 +68,10 @@ namespace Proyecto_Ricardo_y_Adrian
             do
             {
                 Console.WriteLine("\n~ 1) Create signal: \n" +
-                                    "~ 2) Add values to signal: \n" +
-                                    "~ 3) aaa: \n" +
-                                    "~ 4) aaa: \n" +
+                                    "~ 2) Add values to actual list: \n" +
+                                    "~ 3) Add values to file: \n" +
+                                    "~ 4) Search signal (By Name): \n" +
+                                    "~ 5) Show file: \n" +
                                     "~ 0) Exit: \n");
 
                 choice = Convert.ToInt32(Console.ReadLine());
@@ -81,20 +83,23 @@ namespace Proyecto_Ricardo_y_Adrian
                         break;
 
                     case 1:
-
                         create_signal();
                         break;
 
                     case 2:
-                        add_values_to_signal();
+                        add_values_to_actual_list();
                         break;
 
                     case 3:
-
+                        add_values_to_file();
                         break;
 
                     case 4:
+                        search_signal();
+                        break;
 
+                    case 5:
+                        show_file();
                         break;
 
                 }
@@ -124,11 +129,11 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 if (type == 1 && !check_name_list(name))
                 {
-                    if(analogic.create_signal(name, value))
+                    if (analogic.create_signal(name, value))
                     {
                         created = true;
                         signal_list.Add(analogic.search_signal(name));
-                        
+
                     }
                     else
                     {
@@ -148,7 +153,7 @@ namespace Proyecto_Ricardo_y_Adrian
                     {
                         created = false;
                     }
-                    
+
                 }
                 else
                 {
@@ -168,12 +173,12 @@ namespace Proyecto_Ricardo_y_Adrian
                 create_signal();
             }
 
-            
+
         }
 
-
-        private void add_values_to_signal()
+        private void add_values_to_actual_list()
         {
+
             int pos = 0, value = 0;
             bool find = false;
             Signal_Type type = Signal_Type.Analogic;
@@ -211,35 +216,77 @@ namespace Proyecto_Ricardo_y_Adrian
                 }
                 else
                 {
-                    Console.WriteLine("The hasn´t been found");
+                    Console.WriteLine("The signal hasn´t been found");
                 }
-            }catch(FormatException e)
+            }
+            catch (FormatException e)
             {
-                add_values_to_signal();
+                add_values_to_actual_list();
                 Console.WriteLine(e.Message);
             }
-           
+
         }
 
         private bool check_name_list(string name)
         {
-            foreach(Signal analogic in analogic.Signals_list)
+            foreach (Signal analogic in analogic.Signals_list)
             {
-                if(analogic.Name == name)
+                if (analogic.Name == name)
                 {
                     return true;
                 }
             }
 
-            foreach(Signal digital in digital.Signals_list)
+            foreach (Signal digital in digital.Signals_list)
             {
-                if(digital.Name == name)
+                if (digital.Name == name)
                 {
                     return true;
                 }
             }
 
             return false;
+        }
+
+        private void search_signal()
+        {
+            string name;
+            List<Signal> signal_searched = new List<Signal>();
+
+            Console.WriteLine("\nWrite the signal's name: ");
+            name = Console.ReadLine();
+
+            signal_searched = files.charge_list(name);
+            Console.WriteLine("\nFile content: ");
+            show_signal(signal_searched);
+
+        }
+        private void show_signal(List<Signal> signal_list)
+        {
+            foreach (Signal signal in signal_list)
+            {
+                Console.WriteLine(signal.ToString());
+            }
+        }
+
+        private void show_file()
+        {
+            List<Signal> signals = files.charge_list();
+            show_signal(signals);
+        }
+
+        private void add_values_to_file()
+        {
+            string name;
+            int value;
+            Signal signal = null;
+            Console.WriteLine("Introduce the name");
+            name = Console.ReadLine();
+            Console.WriteLine("Introduce the value");
+            value = Convert.ToInt32(Console.ReadLine());
+
+            files.add_valuesToSignal(name, value);
+          
         }
 
     }

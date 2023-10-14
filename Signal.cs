@@ -25,6 +25,12 @@ namespace Proyecto_Ricardo_y_Adrian
             this.numeric_value = numeric_value;
         }
 
+        public Signal(string name, Signal_Type type_Signal)
+        {
+            this.name = name;
+            this.type_Signal = type_Signal;
+        }
+
         public Signal(string name, DateTime time, Signal_Type type_Signal, int numeric_value)
         {
             this.name = name;

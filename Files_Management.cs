@@ -96,11 +96,11 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 words = content_file.Split(delimiterChars);
 
-                signal_name = words[0];
+                signal_name = words[1];
 
-                type = words[1] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
-                time = file_Management.Date_Management.create_date(words[2]);
-                value = Convert.ToInt32(words[3]);
+                type = words[3] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
+                time = file_Management.Date_Management.create_date(words[5]);
+                value = Convert.ToInt32(words[7]);
 
                 signal_support = new Signal(signal_name, time, type, value);
                 signal_storage.Add(signal_support);
@@ -129,13 +129,13 @@ namespace Proyecto_Ricardo_y_Adrian
             {
                 words = content_file.Split(delimiterChars);
 
-                signal_name = words[0];
+                signal_name = words[1];
 
                 if (search_name == signal_name)
                 {
-                    type = words[1] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
-                    time = file_Management.Date_Management.create_date(words[2]);
-                    value = Convert.ToInt32(words[3]);
+                    type = words[3] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
+                    time = file_Management.Date_Management.create_date(words[5]);
+                    value = Convert.ToInt32(words[7]);
 
                     signal_support = new Signal(signal_name, time, type, value);
                     signal_storage.Add(signal_support);
@@ -164,13 +164,13 @@ namespace Proyecto_Ricardo_y_Adrian
             {
                 words = content_file.Split(delimiterChars);
 
-                signal_name = words[0];
-                type = words[1] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
-                time = file_Management.Date_Management.create_date(words[2]);
+                signal_name = words[1];
+                type = words[3] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
+                time = file_Management.Date_Management.create_date(words[5]);
 
                 if (file_Management.Date_Management.check_dates(time_search, time))
                 {
-                    value = Convert.ToInt32(words[3]);
+                    value = Convert.ToInt32(words[7]);
 
                     signal_support = new Signal(signal_name, time, type, value);
                     signal_storage.Add(signal_support);
@@ -308,6 +308,38 @@ namespace Proyecto_Ricardo_y_Adrian
             }
 
             return find;
+        }
+
+        public Signal search_signal(string name)
+        {
+            Signal signal = null;
+            List<Signal> signals = new List<Signal>();
+
+            if (check_repeated(name))
+            {
+                signals = charge_list(name);
+                signal = new Signal(name, signals.ElementAt(0).Type_Signal);
+            }
+
+            return signal;
+        }
+
+        public bool add_valuesToSignal(string name, int value)
+        {
+            if (check_repeated(name))
+            {
+                Signal new_record = search_signal(name);
+                new_record.Numeric_value = value;
+                new_record.Time = DateTime.UtcNow;
+
+                save_signal(new_record);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }
