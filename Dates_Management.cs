@@ -16,15 +16,33 @@ namespace Proyecto_Ricardo_y_Adrian
 
             char[] delimiter = { '-', '/' };
             string[] group_time;
-            int day, month, year, hour, minute, seconds;
+            int day = 0, month = 0, year = 0, hour = 0, minute = 0, seconds = 0;
             group_time = time.Split(delimiter);
 
-            day = Convert.ToInt32(group_time[0]);
-            month = Convert.ToInt32(group_time[1]);
-            year = Convert.ToInt32(group_time[2]);
-            hour = Convert.ToInt32(group_time[3]);
-            minute = Convert.ToInt32(group_time[4]);
-            seconds = Convert.ToInt32(group_time[5]);
+            for (int i = 0; i < group_time.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        day = Convert.ToInt32(group_time[0]);
+                        break;
+                    case 1:
+                        month = Convert.ToInt32(group_time[1]);
+                        break;
+                    case 2:
+                        year = Convert.ToInt32(group_time[2]);
+                        break;
+                    case 3:
+                        hour = Convert.ToInt32(group_time[3]);
+                        break;
+                    case 4:
+                        minute = Convert.ToInt32(group_time[4]);
+                        break;
+                    case 5:
+                        seconds = Convert.ToInt32(group_time[5]);
+                        break;
+                }
+            }
 
             actual_time = new DateTime(year, month, day, hour, minute, seconds);
 

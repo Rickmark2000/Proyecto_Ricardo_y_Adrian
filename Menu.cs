@@ -67,11 +67,13 @@ namespace Proyecto_Ricardo_y_Adrian
 
             do
             {
+                Console.Clear();
                 Console.WriteLine("\n~ 1) Create signal: \n" +
                                     "~ 2) Add values to actual list: \n" +
                                     "~ 3) Add values to file: \n" +
                                     "~ 4) Search signal (By Name): \n" +
-                                    "~ 5) Show file: \n" +
+                                    "~ 5) Remove signals from file(By Name): \n" +
+                                    "~ 6) Show file: \n" +
                                     "~ 0) Exit: \n");
 
                 choice = Convert.ToInt32(Console.ReadLine());
@@ -99,6 +101,9 @@ namespace Proyecto_Ricardo_y_Adrian
                         break;
 
                     case 5:
+                        remove_signal();
+                        break;
+                    case 6:
                         show_file();
                         break;
 
@@ -287,6 +292,16 @@ namespace Proyecto_Ricardo_y_Adrian
 
             files.add_valuesToSignal(name, value);
           
+        }
+
+        private void remove_signal()
+        {
+            string name = "";
+
+            Console.WriteLine("Introduce the name");
+            name = Console.ReadLine();
+
+            files.remove_signals(name);
         }
 
     }

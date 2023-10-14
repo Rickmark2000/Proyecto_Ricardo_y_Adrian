@@ -95,7 +95,6 @@ namespace Proyecto_Ricardo_y_Adrian
             {
 
                 words = content_file.Split(delimiterChars);
-
                 signal_name = words[1];
 
                 type = words[3] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
@@ -233,13 +232,18 @@ namespace Proyecto_Ricardo_y_Adrian
         #region "------------REMOVE SIGNAL-------------------"
         public List<Signal> remove_signals(string name)
         {
+            int pos = 0;
             List<Signal> file_content = charge_list();
 
-            foreach (Signal signal in file_content)
+            while (pos<file_content.Count)
             {
-                if (signal.Name == name)
+                if (file_content.ElementAt(pos).Name == name)
                 {
-                    file_content.Remove(signal);
+                    file_content.RemoveAt(pos);
+                }
+                else
+                {
+                    pos++;
                 }
 
             }
