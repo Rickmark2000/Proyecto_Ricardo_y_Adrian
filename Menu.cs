@@ -86,7 +86,6 @@ namespace Proyecto_Ricardo_y_Adrian
                         break;
 
                     case 2:
-
                         add_values_to_signal();
                         break;
 
@@ -123,7 +122,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 Console.WriteLine("Write the signal's Value: ");
                 value = Convert.ToInt32(Console.ReadLine());
 
-                if (type == 1)
+                if (type == 1 && !check_name_list(name))
                 {
                     if(analogic.create_signal(name, value))
                     {
@@ -138,7 +137,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
 
                 }
-                else if (type == 2)
+                else if (type == 2 && !check_name_list(name))
                 {
                     if (digital.create_signal(name, value))
                     {
@@ -171,9 +170,76 @@ namespace Proyecto_Ricardo_y_Adrian
 
             
         }
+
+
         private void add_values_to_signal()
         {
+            int pos = 0, value = 0;
+            bool find = false;
+            Signal_Type type = Signal_Type.Analogic;
+            Signal signal;
+            string name = "";
 
+            Console.WriteLine("Introduce the name");
+            name = Console.ReadLine();
+            try
+            {
+                Console.WriteLine("Introduce the value");
+                value = Convert.ToInt32(Console.ReadLine());
+
+                while (!find && pos < signal_list.Count)
+                {
+                    if (name == signal_list.ElementAt(pos).Name)
+                    {
+                        find = true;
+                        type = signal_list.ElementAt(pos).Type_Signal;
+                    }
+                    else
+                    {
+                        pos++;
+                    }
+
+                }
+
+                if (find && type == Signal_Type.Analogic)
+                {
+                    analogic.add_valuesToSignal(name, value);
+                }
+                else if (find && type == Signal_Type.Digital)
+                {
+                    digital.add_valuesToSignal(name, value);
+                }
+                else
+                {
+                    Console.WriteLine("The hasn´t been found");
+                }
+            }catch(FormatException e)
+            {
+                add_values_to_signal();
+                Console.WriteLine(e.Message);
+            }
+           
+        }
+
+        private bool check_name_list(string name)
+        {
+            foreach(Signal analogic in analogic.Signals_list)
+            {
+                if(analogic.Name == name)
+                {
+                    return true;
+                }
+            }
+
+            foreach(Signal digital in digital.Signals_list)
+            {
+                if(digital.Name == name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
     }
