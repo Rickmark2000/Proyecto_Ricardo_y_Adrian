@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
@@ -67,16 +68,18 @@ namespace Proyecto_Ricardo_y_Adrian
 
             do
             {
-                Console.Clear();
+
                 Console.WriteLine("\n~ 1) Create signal: \n" +
                                     "~ 2) Add values to actual list: \n" +
                                     "~ 3) Add values to file: \n" +
                                     "~ 4) Search signal (By Name): \n" +
-                                    "~ 5) Remove signals from file(By Name): \n" +
-                                    "~ 6) Show file: \n" +
-                                    "~ 0) Exit: \n");
+                                    "~ 5) Search signal (By date): \n" +
+                                    "~ 6) Remove signals (By Name): \n" +
+                                    "~ 7) Remove signals (By Date): \n" +
+                                    "~ 8) Show file: \n" +
+                "~ 0) Exit: \n");
 
-                choice = Convert.ToInt32(Console.ReadLine());
+                choice = Convert.ToInt32(Console.ReadLine()); 
 
                 switch (choice)
                 {
@@ -97,13 +100,21 @@ namespace Proyecto_Ricardo_y_Adrian
                         break;
 
                     case 4:
-                        search_signal();
+                        search_signal_name();
                         break;
 
                     case 5:
-                        remove_signal();
+                        search_signal_time();
                         break;
                     case 6:
+                        remove_signal_name();
+                        break;
+
+                    case 7:
+                        remove_signal_date();
+                        break;
+
+                    case 8:
                         show_file();
                         break;
 
@@ -253,7 +264,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return false;
         }
 
-        private void search_signal()
+        private void search_signal_name()
         {
             string name;
             List<Signal> signal_searched = new List<Signal>();
@@ -266,6 +277,28 @@ namespace Proyecto_Ricardo_y_Adrian
             show_signal(signal_searched);
 
         }
+        private void search_signal_time()
+        {
+            DateTime time;
+            int day = 0, month = 0, year = 0;
+
+            List<Signal> signal_searched = new List<Signal>();
+
+            Console.WriteLine("\nWrite the signal's day: ");
+            day = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nWrite the signal's month: ");
+            month = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nWrite the signal's year: ");
+            year = Convert.ToInt32(Console.ReadLine());
+
+            time = new DateTime(year, month, day);
+
+            signal_searched = files.charge_list(time);
+            Console.WriteLine("\nFile content: ");
+            show_signal(signal_searched);
+
+        }
+
         private void show_signal(List<Signal> signal_list)
         {
             foreach (Signal signal in signal_list)
@@ -294,7 +327,17 @@ namespace Proyecto_Ricardo_y_Adrian
           
         }
 
-        private void remove_signal()
+        private void remove_signal_name()
+        {
+            string name = "";
+
+            Console.WriteLine("Introduce the name");
+            name = Console.ReadLine();
+
+            files.remove_signals(name);
+        }
+
+        private void remove_signal_date()
         {
             string name = "";
 
