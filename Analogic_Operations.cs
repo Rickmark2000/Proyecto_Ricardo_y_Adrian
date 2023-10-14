@@ -14,7 +14,7 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             this.files_management = files_management;
         }
-        public float average_values(string signal_name)
+        public string average_values(string signal_name)
         {
             List<Signal> signals = new List<Signal>();
             signals = files_management.charge_list(signal_name);
@@ -27,10 +27,10 @@ namespace Proyecto_Ricardo_y_Adrian
             }
 
             average_value = sum / signals.Count;
-            return average_value;
+            return "The average is " + average_value;
         }
 
-        public float max_value(string signal_name)
+        public string max_value(string signal_name)
         {
             List<Signal> signals = new List<Signal>();
             signals = files_management.charge_list(signal_name);
@@ -45,7 +45,42 @@ namespace Proyecto_Ricardo_y_Adrian
 
             }
 
-            return max_value;
+            return "The maximum value of " + signal_name + " is: " + max_value + ".";
+        }
+
+        public string min_value(string signal_name)
+        {
+            List<Signal> signals = new List<Signal>();
+            signals = files_management.charge_list(signal_name);
+            int min_value = 0;
+
+            for (int i = 0; i < signals.Count(); i++)
+            {
+                if (min_value > signals.ElementAt(i).Numeric_value)
+                {
+                    min_value = signals.ElementAt(i).Numeric_value;
+                }
+
+            }
+
+            return "The minimum value of " + signal_name + " is: " + min_value + ".";
+        }
+
+        public string typical_deviation(string signal_name)
+        {
+            float M = 0.0;
+            float S = 0.0;
+            int k = 1;
+
+            foreach (double value in valueList)
+            {
+                double tmpM = M; 
+                M += (value - tmpM) / k;
+                S += (value - tmpM) * (value - M); 
+                k++;
+            }
+            return Math.Sqrt(S / (k - 2));
+
         }
     }
 }

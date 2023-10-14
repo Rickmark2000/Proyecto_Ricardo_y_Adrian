@@ -397,12 +397,14 @@ namespace Proyecto_Ricardo_y_Adrian
                 {
                     Console.WriteLine("Choose the operation to do:" +
                     "\n 1) Max value:" +
-                    "\n 2) Average values: ");
+                    "\n 2) Average values: " +
+                    "\n 3) Minimum value:" +
+                    "\n 4) Typical desviation:");
                     operation_option = Convert.ToInt32(Console.ReadLine());
 
-                    if (operation_option <= 2 && operation_option > 0)
+                    if (operation_option <= 4 && operation_option > 0)
                     {
-                        Console.WriteLine("The result of the operation is: " + operation.DoOperation(operation_option, signal_name));
+                        Console.WriteLine(operation.DoOperation(operation_option, signal_name));
                     }
                     else
                     {

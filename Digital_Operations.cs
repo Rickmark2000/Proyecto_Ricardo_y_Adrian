@@ -13,7 +13,7 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             this.files_management = files_management;
         }
-        public float average_values(string signal_name)
+        public string average_values(string signal_name)
         {
             List<Signal> signals = new List<Signal>();
             signals = files_management.charge_list(signal_name);
@@ -26,25 +26,54 @@ namespace Proyecto_Ricardo_y_Adrian
             }
 
             average_value = sum / signals.Count;
-            return average_value;
+            return "The average is "+average_value;
         }
 
-        public float max_value(string signal_name)
+        public string max_value(string signal_name)
         {
             List<Signal> signals = new List<Signal>();
             signals = files_management.charge_list(signal_name);
             int max_value = 0;
+            bool status = false;
+            string encencidio;
 
             for (int i = 0; i < signals.Count(); i++)
             {
                 if (max_value < signals.ElementAt(i).Numeric_value)
                 {
                     max_value = signals.ElementAt(i).Numeric_value;
+                    status = signals.ElementAt(i).Numeric_value == 0;
                 }
 
             }
+            encencidio = status ? "On" : "Off";
+            return "The maximum state of "+signal_name+" is: "+ max_value+" and it´s: "+status;
+        }
 
-            return max_value;
+        public string min_value(string signal_name)
+        {
+            List<Signal> signals = new List<Signal>();
+            signals = files_management.charge_list(signal_name);
+            int min_value = 0;
+            bool status = false;
+            string encencidio;
+
+            for (int i = 0; i < signals.Count(); i++)
+            {
+                if (min_value > signals.ElementAt(i).Numeric_value)
+                {
+                    min_value = signals.ElementAt(i).Numeric_value;
+                    status = signals.ElementAt(i).Numeric_value == 0;
+                }
+
+            }
+            encencidio = status ? "On" : "Off";
+            return "The minimum state of " + signal_name + " is: " + min_value + " and it´s: " + status;
+        }
+
+        public string typical_deviation(string signal_name)
+        {
+            throw new NotImplementedException();
         }
         //necesario patron para los calculos
         // Los calculos de la humedad y temperatura con el patrón "Strategy"

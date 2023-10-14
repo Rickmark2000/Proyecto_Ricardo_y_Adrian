@@ -21,9 +21,9 @@ namespace Proyecto_Ricardo_y_Adrian
             this.signal_Operation = signal_Operation;
         }
 
-        public float DoOperation(int op, string signal_name)
+        public string DoOperation(int op, string signal_name)
         {
-            float value = 0;
+            string value = "";
             switch (op)
             {
                 case 1:
@@ -31,6 +31,12 @@ namespace Proyecto_Ricardo_y_Adrian
                     break;
                 case 2:
                     value = signal_Operation.average_values(signal_name);
+                    break;
+                case 3:
+                    value = signal_Operation.min_value(signal_name);
+                    break;
+                case 4:
+                    value = signal_Operation.typical_deviation(signal_name);
                     break;
             }
             return value;
