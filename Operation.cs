@@ -21,12 +21,19 @@ namespace Proyecto_Ricardo_y_Adrian
             this.signal_Operation = signal_Operation;
         }
 
-        public void DoOperation()
+        public float DoOperation(int op)
         {
-            Console.WriteLine("Context: Sorting data using the strategy (not sure how it'll do it)");
-            Signal_Operation.max_value();
-
-         
+            float value = 0;
+            switch (op)
+            {
+                case 1:
+                    value = signal_Operation.max_value();
+                    break;
+                case 2:
+                    value = signal_Operation.average_values();
+                    break;
+            }
+            return value;
         }
     }
 }

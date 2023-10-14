@@ -59,6 +59,7 @@ namespace Proyecto_Ricardo_y_Adrian
             digital = new Digital_Signal();
             analogic = new Analogic_Signal();
             files = new Files_Management();
+            operation = new Operation();
 
         }
         public void OptionMenu()
@@ -358,7 +359,41 @@ namespace Proyecto_Ricardo_y_Adrian
         private void do_operations()
         {
             Signal_Type type = Signal_Type.Digital;
-            throw new NotImplementedException();
+            int op=0,operation_option = 0;
+            Console.WriteLine("Choose the type of signals you want to operate with:" +
+                "\n 1) Digital" +
+                "\n 2) Analog");
+            op = Convert.ToInt32(Console.ReadLine());
+            switch (op)
+            {
+                case 1:
+                    type = Signal_Type.Digital;
+                    break;
+                case 2:
+                    type = Signal_Type.Analogic;
+                    break;
+                default:
+                    Console.WriteLine("WRONG OPTION!!!");
+                    do_operations();
+                    break;
+            }
+
+            if (type == Signal_Type.Digital)
+            {
+                operation.Signal_Operation = new Digital_Operations();
+            }
+            else
+            {
+                operation.Signal_Operation= new Analogic_Operations();
+            }
+
+            Console.WriteLine("Choose the operation to do:" +
+                "\n 1) Max value:" +
+                "\n 2) Average values: ");
+            operation_option = Convert.ToInt32(Console.ReadLine());
+
+           Console.WriteLine("The result of the operation is: "+operation.DoOperation(operation_option));
+
         }
 
     }

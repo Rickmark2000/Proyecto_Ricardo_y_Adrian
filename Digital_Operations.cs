@@ -8,14 +8,15 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Digital_Operations : ISignal_Operations
     {
-        public void average_values()
+        public float average_values()
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
-        public void max_value()
+        public float max_value()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Digital");
+            return 0;
         }
         //necesario patron para los calculos
         // Los calculos de la humedad y temperatura con el patrón "Strategy"

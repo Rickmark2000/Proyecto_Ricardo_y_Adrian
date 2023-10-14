@@ -8,14 +8,14 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Analogic_Operations : ISignal_Operations
     {
-        public void average_values()
+        public float average_values()
         {
-            throw new NotImplementedException();
+            return 1;
         }
 
-        public void max_value()
+        public float max_value()
         {
-            throw new NotImplementedException();
+            return 1;
         }
     }
 }
