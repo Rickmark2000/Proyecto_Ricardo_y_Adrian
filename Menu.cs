@@ -13,7 +13,7 @@ namespace Proyecto_Ricardo_y_Adrian
         private List<Signals> signals_list;
         private List<Signal> signal_list;
         private Digital_Signal digital;
-        private Analogic_Signal analogic;
+        private Analog_Signal analog;
         private Files_Management files;
         private Operation operation;
         private Signals signals_class;
@@ -23,7 +23,7 @@ namespace Proyecto_Ricardo_y_Adrian
             signals_list = new List<Signals>();
             signal_list = new List<Signal>();
             digital = new Digital_Signal();
-            analogic = new Analogic_Signal();
+            analog = new Analog_Signal();
             files = new Files_Management();
             operation = new Operation();
         }
@@ -110,10 +110,10 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 if (type == 1 && !check_name_list(name) && !string.IsNullOrEmpty(name))
                 {
-                    if (analogic.create_signal(name, value))
+                    if (analog.create_signal(name, value))
                     {
                         created = true;
-                        signal_list.Add(analogic.search_signal(name));
+                        signal_list.Add(analog.search_signal(name));
 
                     }
                     else
@@ -162,7 +162,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
             int pos = 0, value = 0;
             bool find = false;
-            Signal_Type type = Signal_Type.Analogic;
+            Signal_Type type = Signal_Type.Analog;
             Signal signal;
             string name = "";
 
@@ -190,9 +190,9 @@ namespace Proyecto_Ricardo_y_Adrian
 
                     }
 
-                    if (find && type == Signal_Type.Analogic)
+                    if (find && type == Signal_Type.Analog)
                     {
-                        analogic.add_valuesToSignal(name, value);
+                        analog.add_valuesToSignal(name, value);
                     }
                     else if (find && type == Signal_Type.Digital)
                     {
@@ -218,9 +218,9 @@ namespace Proyecto_Ricardo_y_Adrian
 
         private bool check_name_list(string name)
         {
-            foreach (Signal analogic in analogic.Signals_list)
+            foreach (Signal analog in analog.Signals_list)
             {
-                if (analogic.Name == name)
+                if (analog.Name == name)
                 {
                     return true;
                 }
@@ -396,7 +396,7 @@ namespace Proyecto_Ricardo_y_Adrian
                         type = Signal_Type.Digital;
                         break;
                     case 2:
-                        type = Signal_Type.Analogic;
+                        type = Signal_Type.Analog;
                         break;
                     default:
                         Console.WriteLine("WRONG OPTION!!!");
@@ -410,7 +410,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 }
                 else
                 {
-                    operation.Signal_Operation = new Analogic_Operations(files);
+                    operation.Signal_Operation = new Analog_Operations(files);
                 }
 
                 Console.WriteLine("Choose the name of the signal:");

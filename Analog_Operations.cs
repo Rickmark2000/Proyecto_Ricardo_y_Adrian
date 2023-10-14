@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public class Analogic_Operations : ISignal_Operations
+    public class Analog_Operations : ISignal_Operations
     {
 
         private Files_Management files_management;
-        public Analogic_Operations(Files_Management files_management)
+        public Analog_Operations(Files_Management files_management)
         {
             this.files_management = files_management;
         }

@@ -76,7 +76,7 @@ namespace Proyecto_Ricardo_y_Adrian
             string[] words;
             Signal signal_support;
             string signal_name = "";
-            Signal_Type type = Signal_Type.Analogic;
+            Signal_Type type = Signal_Type.Analog;
             DateTime time = DateTime.MaxValue;
             int value = 0;
 
@@ -90,7 +90,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 words = content_file.Split(delimiterChars);
                 signal_name = words[1];
 
-                type = words[3] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
+                type = words[3] == "Analog" ? Signal_Type.Analog : Signal_Type.Digital;
                 time = file_Management.Date_Management.create_date(words[5]);
                 value = Convert.ToInt32(words[7]);
 
@@ -109,7 +109,7 @@ namespace Proyecto_Ricardo_y_Adrian
             string[] words;
             Signal signal_support;
             string signal_name = "";
-            Signal_Type type = Signal_Type.Analogic;
+            Signal_Type type = Signal_Type.Analog;
             DateTime time = DateTime.MaxValue;
             int value = 0;
 
@@ -125,7 +125,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 if (search_name == signal_name)
                 {
-                    type = words[3] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
+                    type = words[3] == "Analog" ? Signal_Type.Analog : Signal_Type.Digital;
                     time = file_Management.Date_Management.create_date(words[5]);
                     value = Convert.ToInt32(words[7]);
 
@@ -144,7 +144,7 @@ namespace Proyecto_Ricardo_y_Adrian
             string[] words;
             Signal signal_support;
             string signal_name = "";
-            Signal_Type type = Signal_Type.Analogic;
+            Signal_Type type = Signal_Type.Analog;
             DateTime time = DateTime.MaxValue;
             int value = 0;
 
@@ -157,7 +157,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 words = content_file.Split(delimiterChars);
 
                 signal_name = words[1];
-                type = words[3] == "Analogic" ? Signal_Type.Analogic : Signal_Type.Digital;
+                type = words[3] == "Analog" ? Signal_Type.Analog : Signal_Type.Digital;
                 time = file_Management.Date_Management.create_date(words[5]);
 
                 if (file_Management.Date_Management.check_dates(time_search, time))

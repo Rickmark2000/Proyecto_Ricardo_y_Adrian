@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public enum Signal_Type { Digital, Analogic }
+    public enum Signal_Type { Digital, Analog }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
-    public class Analogic_Signal : Signals
+    public class Analog_Signal : Signals
     {
         public override bool create_signal(string name, int value)
         {
@@ -16,7 +16,7 @@ namespace Proyecto_Ricardo_y_Adrian
             if (!check_repeated(name))
             {
 
-                signal = new Signal(name, DateTime.UtcNow, Signal_Type.Analogic, value);
+                signal = new Signal(name, DateTime.UtcNow, Signal_Type.Analog, value);
 
                 if (add_signal(signal))
                 {
