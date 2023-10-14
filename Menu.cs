@@ -383,11 +383,11 @@ namespace Proyecto_Ricardo_y_Adrian
 
                 if (type == Signal_Type.Digital)
                 {
-                    operation.Signal_Operation = new Digital_Operations();
+                    operation.Signal_Operation = new Digital_Operations(files);
                 }
                 else
                 {
-                    operation.Signal_Operation = new Analogic_Operations();
+                    operation.Signal_Operation = new Analogic_Operations(files);
                 }
 
                 Console.WriteLine("Choose the name of the signal:");
