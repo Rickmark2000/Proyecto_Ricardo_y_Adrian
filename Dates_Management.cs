@@ -8,6 +8,7 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Dates_Management
     {
+        /*Create a formatted DateTime object*/
         public DateTime create_date(string time)
         {
             DateTime actual_time;
@@ -47,6 +48,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return actual_time;
         }
 
+        /*Compare two Dates to know if they are equals*/
         public bool check_dates(DateTime time_search, DateTime time)
         {
             bool check = false;

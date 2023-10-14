@@ -89,6 +89,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Create a new signal*/
         private void create_signal()
         {
             int type = 0;
@@ -157,6 +158,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Add values to the list if the signal exists (not the file)*/
         private void add_values_to_actual_list()
         {
 
@@ -216,6 +218,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Check if a signal exists in the list*/
         private bool check_name_list(string name)
         {
             foreach (Signal analog in analog.Signals_list)
@@ -237,6 +240,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return false;
         }
 
+        /*Returns the signal registers from the file ( By Name )*/
         private void search_signal_name()
         {
             string name;
@@ -258,6 +262,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Returns the signal registers from the file ( By Time )*/
         private void search_signal_time()
         {
             DateTime time;
@@ -288,6 +293,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Show a list of signals*/
         private void show_signal(List<Signal> signal_list)
         {
             foreach (Signal signal in signal_list)
@@ -296,12 +302,14 @@ namespace Proyecto_Ricardo_y_Adrian
             }
         }
 
+        /*Shows all signal records of the file*/
         private void show_file()
         {
             List<Signal> signals = files.charge_list();
             show_signal(signals);
         }
 
+        /*Add new values of a signal to the file*/
         private void add_values_to_file()
         {
             string name;
@@ -334,6 +342,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Remove all the records of a signal from the file*/
         private void remove_signal_name()
         {
             string name = "";
@@ -352,6 +361,7 @@ namespace Proyecto_Ricardo_y_Adrian
   
         }
 
+        /*Remove the records of all the signals with an specific date from the file*/
         private void remove_signal_date()
         {
             DateTime time;
@@ -379,6 +389,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Shows up the signals operations menu*/
         private void do_operations()
         {
             Signal_Type type = Signal_Type.Digital;

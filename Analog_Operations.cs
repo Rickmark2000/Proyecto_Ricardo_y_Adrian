@@ -14,6 +14,8 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             this.files_management = files_management;
         }
+
+        /*Calculate the average of values of a signal*/
         public string average_values(string signal_name)
         {
             List<Signal> signals = new List<Signal>();
@@ -30,6 +32,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return "The average is " + average_value;
         }
 
+        /*Calculate the maximum value of the values of a signal*/
         public string max_value(string signal_name)
         {
             List<Signal> signals = new List<Signal>();
@@ -48,6 +51,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return "The maximum value of " + signal_name + " is: " + max_value + ".";
         }
 
+        /*Calculate the minimum value of the values of a signal*/
         public string min_value(string signal_name)
         {
             List<Signal> signals = new List<Signal>();
@@ -66,6 +70,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return "The minimum value of " + signal_name + " is: " + min_value + ".";
         }
 
+        /*Calculate the typical deviation of the values of a signal*/
         public string typical_deviation(string signal_name)
         {
             List<Signal> signals = new List<Signal>();

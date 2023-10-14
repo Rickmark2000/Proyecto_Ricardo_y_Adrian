@@ -9,6 +9,7 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Analog_Signal : Signals
     {
+        /*Creates a new Analog signal*/
         public override bool create_signal(string name, int value)
         {
             bool created = false;
@@ -38,6 +39,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Register new values of an Analog signal to the list*/
         public override bool add_valuesToSignal(string name, int value)
         {
             if (check_repeated(name))

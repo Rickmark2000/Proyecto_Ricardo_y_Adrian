@@ -14,6 +14,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public bool Status { get => status; set => status = value; }
 
+        /*Creates a new Digital signal*/
         public override bool create_signal(string name, int value)
         {
             bool created = false;
@@ -45,6 +46,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Register new values of a Digital signal to the list*/
         public override bool add_valuesToSignal(string name, int value)
         {
             if (check_repeated(name) && check_status(value))
@@ -64,6 +66,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Check that the value is boolean*/
         private bool check_status(int value)
         {
             bool alright;

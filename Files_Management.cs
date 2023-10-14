@@ -281,6 +281,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         #endregion
 
+        /*Checks if a signal exists in the file*/
         public bool check_repeated(string name)
         {
             int pos = 0;
@@ -343,6 +344,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return find;
         }
 
+        /*Returns an existing signal*/
         public Signal search_signal(string name)
         {
             Signal signal = null;
@@ -357,6 +359,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return signal;
         }
 
+        /*Register new values of a Digital signal to the file*/
         public bool add_valuesToSignal(string name, int value)
         {
             if (check_repeated(name))

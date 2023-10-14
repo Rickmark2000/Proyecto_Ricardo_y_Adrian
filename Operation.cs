@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ricardo_y_Adrian
 {
+
+    /*This class manages if the operation is going to be for Analog or digital signals.*/
     public class Operation
     {
         private ISignal_Operations signal_Operation;
@@ -21,6 +23,7 @@ namespace Proyecto_Ricardo_y_Adrian
             this.signal_Operation = signal_Operation;
         }
 
+        /*Returns the operation based on the chosen option*/
         public string DoOperation(int op, string signal_name)
         {
             string value = "";

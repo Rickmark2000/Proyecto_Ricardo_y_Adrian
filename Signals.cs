@@ -24,7 +24,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public List<Signal> Signals_list { get => signals_list; private set => signals_list = value; }
 
-
+        /*Add new signal values to the list (not the file)*/
         public bool add_signal(Signal signal)
         {
 
@@ -40,6 +40,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
+        /*Checks if a signal Exists on the list (not the signal)*/
         public bool check_repeated(string name)
         {
 
@@ -54,6 +55,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return false;
         }
 
+        /*Removes a signal to the list (not the file)*/
         public void remove_signal(string name)
         {
             int pos = 0;
@@ -73,6 +75,7 @@ namespace Proyecto_Ricardo_y_Adrian
             }
         }
 
+        /*Returns a signal by name on the list (not the file)*/
         public Signal search_signal(string name)
         {
             Signal signal_found = null;
@@ -92,6 +95,7 @@ namespace Proyecto_Ricardo_y_Adrian
             return signal_found;
         }
 
+        /*Returns a list of signals with an specific Date from the file (not the file)*/
         public List<Signal> search_signal(DateTime date)
         {
             List<Signal> list_found = new List<Signal>();

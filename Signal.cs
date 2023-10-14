@@ -42,11 +42,13 @@ namespace Proyecto_Ricardo_y_Adrian
         public int Numeric_value { get => numeric_value; set => numeric_value = value; }
         internal Signal_Type Type_Signal { get => type_Signal; set => type_Signal = value; }
 
-
+        /*Compare objects*/
         public override bool Equals(object? obj)
         {
             return base.Equals(obj);
         }
+
+        /*Returns the signal data with an specific format*/
         public override string ToString()
         {
             return $"Name: {name}, time: {time}, type: {type_Signal}, value: {numeric_value}";
