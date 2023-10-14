@@ -105,11 +105,6 @@ namespace Proyecto_Ricardo_y_Adrian
             }
 
             return list_found;
-
-            /*
-             * Importante el type_use para decidir que hacer en caso de fichero o lista
-             * 
-             */
           
         }
 
