@@ -8,19 +8,14 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Files_Management : IFiles_Management
     {
-        //vendria bien optimizar los métodos de carga
+
         private File_Management file_Management;
 
         public Files_Management()
         {
             file_Management = new File_Management();
         }
-        /*
-         * el region nos vendria bien para poder acceder mejor al código
-         * #region "----------------NOMBRE DE LA REGION---------------"
-         * Contenido
-         * #endregion
-         */
+
         #region "--------------------SAVE SIGNAL--------------------"
         public void save_signal(List<Signal> signals)
         {
@@ -72,8 +67,6 @@ namespace Proyecto_Ricardo_y_Adrian
         }
         #endregion
 
-
-        //seguro que estos 3 métodos se pueden optimizar
         #region "-----------------CHARGE LIST----------------------------"
         public List<Signal> charge_list()
         {
@@ -179,7 +172,6 @@ namespace Proyecto_Ricardo_y_Adrian
         }
         #endregion
 
-
         #region "-------------CREATE FILE------------------"
         private void create_file(List<Signal> signals)
         {
@@ -208,7 +200,6 @@ namespace Proyecto_Ricardo_y_Adrian
             }
         }
         #endregion
-
 
         private List<string> read_file()
         {

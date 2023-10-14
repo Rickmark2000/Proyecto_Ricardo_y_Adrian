@@ -8,8 +8,6 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Dates_Management
     {
-
-        //¿Se podrá impedir que se tenga que acceder directamente a la posición y se podrá optimizar?
         public DateTime create_date(string time)
         {
             DateTime actual_time;
@@ -49,7 +47,6 @@ namespace Proyecto_Ricardo_y_Adrian
             return actual_time;
         }
 
-        //se puede optimizar. Igual mucho anidado es poco efectivo
         public bool check_dates(DateTime time_search, DateTime time)
         {
             bool check = false;

@@ -13,8 +13,6 @@ namespace Proyecto_Ricardo_y_Adrian
         private Signal_Type type_Signal;
         private int numeric_value;
 
-        //¿sobrecarga del método para aceptar distintas posibilidades?
-
         public Signal(string name)
         {
             this.name = name;

@@ -9,40 +9,6 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Menu
     {
-        /*Tenemos varias opciones:
-         * 1) al añadir indicar un límite de señales que se pueden agregar y gestionarlo en signals
-         * 2) que al entrar en el programa(si al final decidimos implementar el json) cual es el formato en
-         * el que se desean guardar los datos
-         * 3) metodos para cada opción
-         * 4)Habilitar y deshabilitar metodos en función de si se ha usado un método creado
-         * 5) decidir si al crear una señal se habilita añadir valores y que hacer con los valores
-         * (se puede preguntar al usuario si añadir o no los valores que acaba de modificar)
-         * 6)Los datos que se quieran mostrar e interactuar con el usuario se debe de hacer en esta clase
-         * 7) recordar que de momento el datetime que pasemos por parametro aqui solo tendra año, dia y mes
-         * 8) se puede preguntar al usuario si desea buscar por nombre o tiempo
-         * 
-         */
-
-        /*
-         * Recordatorios:
-         * -Actualizar la uml
-         * -Comentar el código cuando acabemos(que hace cada método etc...)
-         */
-
-        /*
-         * Cosas interesantes para implementar:
-         * -Mas intterfaces
-         * -Mas clases
-         * -Mas abstraccion y modularidad
-         * -Json
-         * -Cadena de dependencia
-         * -Expresiones regulares que controlen las respuestas del usuario(Estas opciones de respuestas se almacenarian en 
-         * un array de strings)
-         * -Try/catch para controlar las excepciones que podamos tener
-         * Out,ref e in
-         * Usar el equals
-         * Cualquier idea que se nos ocurra hacer un comentario de ella donde corresponda
-         */
 
         private List<Signals> signals_list;
         private List<Signal> signal_list;
@@ -60,11 +26,10 @@ namespace Proyecto_Ricardo_y_Adrian
             analogic = new Analogic_Signal();
             files = new Files_Management();
             operation = new Operation();
-
         }
         public void OptionMenu()
         {
-            
+
             int choice;
 
             do
@@ -80,7 +45,7 @@ namespace Proyecto_Ricardo_y_Adrian
                                     "~ 8) Do operations: \n" +
                                     "~ 0) Exit: \n");
 
-                choice = Convert.ToInt32(Console.ReadLine()); 
+                choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
                 {
@@ -124,8 +89,6 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
-      
-
         private void create_signal()
         {
             int type = 0;
@@ -145,7 +108,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 Console.WriteLine("Write the signal's Value: ");
                 value = Convert.ToInt32(Console.ReadLine());
 
-                if (type == 1 && !check_name_list(name))
+                if (type == 1 && !check_name_list(name) && !string.IsNullOrEmpty(name))
                 {
                     if (analogic.create_signal(name, value))
                     {
@@ -160,7 +123,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
 
                 }
-                else if (type == 2 && !check_name_list(name))
+                else if (type == 2 && !check_name_list(name) && !string.IsNullOrEmpty(name))
                 {
                     if (digital.create_signal(name, value))
                     {
@@ -205,42 +168,50 @@ namespace Proyecto_Ricardo_y_Adrian
 
             Console.WriteLine("Introduce the name");
             name = Console.ReadLine();
-            try
-            {
-                Console.WriteLine("Introduce the value");
-                value = Convert.ToInt32(Console.ReadLine());
 
-                while (!find && pos < signal_list.Count)
+            if (!string.IsNullOrEmpty(name))
+            {
+                try
                 {
-                    if (name == signal_list.ElementAt(pos).Name)
+                    Console.WriteLine("Introduce the value");
+                    value = Convert.ToInt32(Console.ReadLine());
+
+                    while (!find && pos < signal_list.Count)
                     {
-                        find = true;
-                        type = signal_list.ElementAt(pos).Type_Signal;
+                        if (name == signal_list.ElementAt(pos).Name)
+                        {
+                            find = true;
+                            type = signal_list.ElementAt(pos).Type_Signal;
+                        }
+                        else
+                        {
+                            pos++;
+                        }
+
+                    }
+
+                    if (find && type == Signal_Type.Analogic)
+                    {
+                        analogic.add_valuesToSignal(name, value);
+                    }
+                    else if (find && type == Signal_Type.Digital)
+                    {
+                        digital.add_valuesToSignal(name, value);
                     }
                     else
                     {
-                        pos++;
+                        Console.WriteLine("The signal hasn´t been found");
                     }
-
                 }
-
-                if (find && type == Signal_Type.Analogic)
+                catch (FormatException e)
                 {
-                    analogic.add_valuesToSignal(name, value);
-                }
-                else if (find && type == Signal_Type.Digital)
-                {
-                    digital.add_valuesToSignal(name, value);
-                }
-                else
-                {
-                    Console.WriteLine("The signal hasn´t been found");
+                    add_values_to_actual_list();
+                    Console.WriteLine(e.Message);
                 }
             }
-            catch (FormatException e)
+            else
             {
-                add_values_to_actual_list();
-                Console.WriteLine(e.Message);
+                Console.WriteLine("The value is wrong.");
             }
 
         }
@@ -274,11 +245,19 @@ namespace Proyecto_Ricardo_y_Adrian
             Console.WriteLine("\nWrite the signal's name: ");
             name = Console.ReadLine();
 
-            signal_searched = files.charge_list(name);
-            Console.WriteLine("\nFile content: ");
-            show_signal(signal_searched);
+            if (!string.IsNullOrEmpty(name))
+            {
+                signal_searched = files.charge_list(name);
+                Console.WriteLine("\nFile content: ");
+                show_signal(signal_searched);
+            }
+            else
+            {
+                Console.WriteLine("The value is wrong.");
+            }
 
         }
+
         private void search_signal_time()
         {
             DateTime time;
@@ -286,18 +265,26 @@ namespace Proyecto_Ricardo_y_Adrian
 
             List<Signal> signal_searched = new List<Signal>();
 
-            Console.WriteLine("\nWrite the signal's day: ");
-            day = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("\nWrite the signal's month: ");
-            month = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("\nWrite the signal's year: ");
-            year = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                Console.WriteLine("\nWrite the signal's day: ");
+                day = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\nWrite the signal's month: ");
+                month = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\nWrite the signal's year: ");
+                year = Convert.ToInt32(Console.ReadLine());
 
-            time = new DateTime(year, month, day);
+                time = new DateTime(year, month, day);
 
-            signal_searched = files.charge_list(time);
-            Console.WriteLine("\nFile content: ");
-            show_signal(signal_searched);
+                signal_searched = files.charge_list(time);
+                Console.WriteLine("\nFile content: ");
+                show_signal(signal_searched);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Wrong value. Try again.");
+                search_signal_time();
+            }
 
         }
 
@@ -322,11 +309,29 @@ namespace Proyecto_Ricardo_y_Adrian
             Signal signal = null;
             Console.WriteLine("Introduce the name");
             name = Console.ReadLine();
-            Console.WriteLine("Introduce the value");
-            value = Convert.ToInt32(Console.ReadLine());
 
-            files.add_valuesToSignal(name, value);
-          
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+
+                    Console.WriteLine("Introduce the value");
+                    value = Convert.ToInt32(Console.ReadLine());
+
+                    files.add_valuesToSignal(name, value);
+                }
+                else
+                {
+                    Console.WriteLine("Wrong name value, try again.");
+                    add_values_to_file();
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Wrong value, try again.");
+                add_values_to_file();
+            }
+
         }
 
         private void remove_signal_name()
@@ -336,7 +341,15 @@ namespace Proyecto_Ricardo_y_Adrian
             Console.WriteLine("Introduce the name");
             name = Console.ReadLine();
 
-            files.remove_signals(name);
+            if (!string.IsNullOrEmpty(name))
+            {
+                files.remove_signals(name);
+            }
+            else
+            {
+                Console.WriteLine("Wrong name value.");
+            }
+  
         }
 
         private void remove_signal_date()
@@ -344,22 +357,32 @@ namespace Proyecto_Ricardo_y_Adrian
             DateTime time;
             int day = 0, month = 0, year = 0;
 
-            Console.WriteLine("\nWrite the signal's day: ");
-            day = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("\nWrite the signal's month: ");
-            month = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("\nWrite the signal's year: ");
-            year = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                Console.WriteLine("\nWrite the signal's day: ");
+                day = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\nWrite the signal's month: ");
+                month = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\nWrite the signal's year: ");
+                year = Convert.ToInt32(Console.ReadLine());
 
-            time = new DateTime(year, month, day);
+                time = new DateTime(year, month, day);
 
-            files.remove_signals(time);
+                files.remove_signals(time);
+
+            }
+            catch (FormatException)
+            {
+                remove_signal_date();
+                Console.WriteLine("Wrong value, try again.");
+            }
+
         }
 
         private void do_operations()
         {
             Signal_Type type = Signal_Type.Digital;
-            int op=0,operation_option = 0;
+            int op = 0, operation_option = 0;
             string signal_name = "";
             try
             {
@@ -393,7 +416,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 Console.WriteLine("Choose the name of the signal:");
                 signal_name = Console.ReadLine();
 
-                if(files.check_repeated(signal_name,type) && !string.IsNullOrEmpty(signal_name))
+                if (files.check_repeated(signal_name, type) && !string.IsNullOrEmpty(signal_name))
                 {
                     Console.WriteLine("Choose the operation to do:" +
                     "\n 1) Max value:" +
@@ -417,12 +440,11 @@ namespace Proyecto_Ricardo_y_Adrian
                 }
 
             }
-            catch (FormatException) 
+            catch (FormatException)
             {
                 Console.WriteLine("Wrong value. Try again.");
                 do_operations();
             }
-           
 
         }
 

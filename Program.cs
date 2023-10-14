@@ -14,8 +14,6 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             menu.OptionMenu();
    
-
         }
-
     }
 }

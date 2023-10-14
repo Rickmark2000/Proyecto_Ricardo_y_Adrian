@@ -15,7 +15,9 @@ namespace Proyecto_Ricardo_y_Adrian
         public List<Signal> charge_list(DateTime time_search);
         public List<Signal> remove_signals(string name);
         public List<Signal> remove_signals(DateTime time_delete);
-
         public bool check_repeated(string name);
+        public bool check_repeated(string name, Signal_Type type);
+        public Signal search_signal(string name);
+        public bool add_valuesToSignal(string name, int value);
     }
 }

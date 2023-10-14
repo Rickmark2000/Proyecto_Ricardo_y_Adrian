@@ -21,6 +21,7 @@ namespace Proyecto_Ricardo_y_Adrian
             file_management = new File_Management();
             files_management = new Files_Management();
         }
+
         public List<Signal> Signals_list { get => signals_list; private set => signals_list = value; }
 
 
@@ -39,12 +40,6 @@ namespace Proyecto_Ricardo_y_Adrian
 
         }
 
-        //esto iria mas en files si esta repetido en el fichero
-        // se puede crear el mismo método aquí para saber si es en la lista si esta repetido
-        // si esta repetido en la lista esto influye para crear un objeto file.
-        // el nombre es un identificador único por lo que no puede haber en la lista actual
-        // 2 nombres iguales. Podriamos hacer que si existe en la lista actual, lo registre 
-        //en el fichero y borre la señal en la lista para añadir el nuevo que se quiere agregar
         public bool check_repeated(string name)
         {
 
@@ -77,7 +72,7 @@ namespace Proyecto_Ricardo_y_Adrian
                 }
             }
         }
-        //para mostrar algo en el program usar.toString() de la clase signal
+
         public Signal search_signal(string name)
         {
             /*
@@ -102,7 +97,6 @@ namespace Proyecto_Ricardo_y_Adrian
             return signal_found;
         }
 
-        //para mostrar algo en el program usar.toString() de la clase signal
         public List<Signal> search_signal(DateTime date)
         {
             List<Signal> list_found = new List<Signal>();
@@ -125,6 +119,7 @@ namespace Proyecto_Ricardo_y_Adrian
         }
 
         public abstract bool create_signal(string name, int value);
+
         public abstract bool add_valuesToSignal(string name, int value);
 
     }
