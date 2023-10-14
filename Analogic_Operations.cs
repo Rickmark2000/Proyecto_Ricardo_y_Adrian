@@ -68,19 +68,23 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public string typical_deviation(string signal_name)
         {
-            float M = 0.0;
-            float S = 0.0;
-            int k = 1;
+            List<Signal> signals = new List<Signal>();
+            signals = files_management.charge_list(signal_name);
 
-            foreach (double value in valueList)
+            float average = 0.00f;
+            float sum = 0.00f;
+            int total = 1;
+
+            foreach (Signal signal in signals)
             {
-                double tmpM = M; 
-                M += (value - tmpM) / k;
-                S += (value - tmpM) * (value - M); 
-                k++;
+                float temp_average = average; 
+                average += ((float)signal.Numeric_value - temp_average) / total;
+                sum += ((float)signal.Numeric_value - temp_average) * (signal.Numeric_value - average); 
+                total++;
             }
-            return Math.Sqrt(S / (k - 2));
+            return $"The Typical Deviation of {signal_name} is: {Math.Sqrt(sum / (total - 2))}";
 
         }
+
     }
 }

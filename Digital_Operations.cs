@@ -8,6 +8,7 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Digital_Operations : ISignal_Operations
     {
+
         private Files_Management files_management;
         public Digital_Operations(Files_Management files_management)
         {
@@ -73,9 +74,22 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public string typical_deviation(string signal_name)
         {
-            throw new NotImplementedException();
+            List<Signal> signals = new List<Signal>();
+            signals = files_management.charge_list(signal_name);
+
+            float average = 0.00f;
+            float sum = 0.00f;
+            int total = 1;
+
+            foreach (Signal signal in signals)
+            {
+                float temp_average = average;
+                average += ((float)signal.Numeric_value - temp_average) / total;
+                sum += ((float)signal.Numeric_value - temp_average) * (signal.Numeric_value - average);
+                total++;
+            }
+            return $"The Typical Deviation of {signal_name} is: {Math.Sqrt(sum / (total - 2))}";
         }
-        //necesario patron para los calculos
-        // Los calculos de la humedad y temperatura con el patrón "Strategy"
+
     }
 }
