@@ -70,14 +70,14 @@ namespace Proyecto_Ricardo_y_Adrian
             {
 
                 Console.WriteLine("\n~ 1) Create signal: \n" +
-                                    "~ 2) Add values to actual list: \n" +
-                                    "~ 3) Add values to file: \n" +
-                                    "~ 4) Search signal (By Name): \n" +
-                                    "~ 5) Search signal (By date): \n" +
-                                    "~ 6) Remove signals (By Name): \n" +
-                                    "~ 7) Remove signals (By Date): \n" +
-                                    "~ 8) Show file: \n" +
-                "~ 0) Exit: \n");
+                                    "~ 2) Add values to file: \n" +
+                                    "~ 3) Search signal (By Name): \n" +
+                                    "~ 4) Search signal (By date): \n" +
+                                    "~ 5) Remove signals (By Name): \n" +
+                                    "~ 6) Remove signals (By Date): \n" +
+                                    "~ 7) Show file: \n" +
+                                    "~ 8) Do operations: \n" +
+                                    "~ 0) Exit: \n");
 
                 choice = Convert.ToInt32(Console.ReadLine()); 
 
@@ -92,30 +92,29 @@ namespace Proyecto_Ricardo_y_Adrian
                         break;
 
                     case 2:
-                        add_values_to_actual_list();
-                        break;
-
-                    case 3:
                         add_values_to_file();
                         break;
 
-                    case 4:
+                    case 3:
                         search_signal_name();
                         break;
 
-                    case 5:
+                    case 4:
                         search_signal_time();
                         break;
-                    case 6:
+                    case 5:
                         remove_signal_name();
                         break;
 
-                    case 7:
+                    case 6:
                         remove_signal_date();
                         break;
 
-                    case 8:
+                    case 7:
                         show_file();
+                        break;
+                    case 8:
+                        do_operations();
                         break;
 
                 }
@@ -123,6 +122,8 @@ namespace Proyecto_Ricardo_y_Adrian
             } while (choice != 0);
 
         }
+
+      
 
         private void create_signal()
         {
@@ -339,12 +340,25 @@ namespace Proyecto_Ricardo_y_Adrian
 
         private void remove_signal_date()
         {
-            string name = "";
+            DateTime time;
+            int day = 0, month = 0, year = 0;
 
-            Console.WriteLine("Introduce the name");
-            name = Console.ReadLine();
+            Console.WriteLine("\nWrite the signal's day: ");
+            day = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nWrite the signal's month: ");
+            month = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nWrite the signal's year: ");
+            year = Convert.ToInt32(Console.ReadLine());
 
-            files.remove_signals(name);
+            time = new DateTime(year, month, day);
+
+            files.remove_signals(time);
+        }
+
+        private void do_operations()
+        {
+            Signal_Type type = Signal_Type.Digital;
+            throw new NotImplementedException();
         }
 
     }

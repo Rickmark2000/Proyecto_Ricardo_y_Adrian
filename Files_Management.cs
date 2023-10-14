@@ -253,20 +253,25 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public List<Signal> remove_signals(DateTime time_delete)
         {
+            int pos_file = 0, pos_signals = 0;
             List<Signal> file_content = charge_list();
             List<Signal> signals = charge_list(time_delete);
 
-            foreach (Signal signal in file_content)
+            while (pos_file<file_content.Count)
             {
-                foreach (Signal signal_time in signals)
+                while(pos_signals < signals.Count)
                 {
-                    if (file_Management.Date_Management.check_dates(signal.Time, signal_time.Time))
+                    if (file_Management.Date_Management.check_dates(file_content.ElementAt(pos_file).Time, signals.ElementAt(pos_signals).Time))
                     {
-                        file_content.Remove(signal);
+                        file_content.RemoveAt(pos_file);
                     }
+                    
+                    pos_signals++;
+                    
                 }
 
-
+                pos_signals = 0;
+                pos_file++;
             }
             overWrite_file(file_content);
             return file_content;
@@ -287,6 +292,7 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public bool check_repeated(string name)
         {
+            int pos = 0;
             string[] lines;
             bool find = false;
 
@@ -294,15 +300,16 @@ namespace Proyecto_Ricardo_y_Adrian
             {
                 lines = File.ReadAllLines(file_Management.Path);
 
-                foreach (string line in lines)
+                while (pos<lines.Length && !find)
                 {
-                    if (line.Contains($"{name}"))
+              
+                    if (lines[pos].Contains($"{name}"))
                     {
                        find = true;
                     }
                     else
                     {
-                        find = false;
+                        pos++;
                     }
                 }
             }
