@@ -360,39 +360,67 @@ namespace Proyecto_Ricardo_y_Adrian
         {
             Signal_Type type = Signal_Type.Digital;
             int op=0,operation_option = 0;
-            Console.WriteLine("Choose the type of signals you want to operate with:" +
-                "\n 1) Digital" +
-                "\n 2) Analog");
-            op = Convert.ToInt32(Console.ReadLine());
-            switch (op)
+            string signal_name = "";
+            try
             {
-                case 1:
-                    type = Signal_Type.Digital;
-                    break;
-                case 2:
-                    type = Signal_Type.Analogic;
-                    break;
-                default:
-                    Console.WriteLine("WRONG OPTION!!!");
-                    do_operations();
-                    break;
-            }
+                Console.WriteLine("Choose the type of signals you want to operate with:" +
+               "\n 1) Digital" +
+               "\n 2) Analog");
+                op = Convert.ToInt32(Console.ReadLine());
+                switch (op)
+                {
+                    case 1:
+                        type = Signal_Type.Digital;
+                        break;
+                    case 2:
+                        type = Signal_Type.Analogic;
+                        break;
+                    default:
+                        Console.WriteLine("WRONG OPTION!!!");
+                        do_operations();
+                        break;
+                }
 
-            if (type == Signal_Type.Digital)
+                if (type == Signal_Type.Digital)
+                {
+                    operation.Signal_Operation = new Digital_Operations();
+                }
+                else
+                {
+                    operation.Signal_Operation = new Analogic_Operations();
+                }
+
+                Console.WriteLine("Choose the name of the signal:");
+                signal_name = Console.ReadLine();
+
+                if(files.check_repeated(signal_name,type) && !string.IsNullOrEmpty(signal_name))
+                {
+                    Console.WriteLine("Choose the operation to do:" +
+                    "\n 1) Max value:" +
+                    "\n 2) Average values: ");
+                    operation_option = Convert.ToInt32(Console.ReadLine());
+
+                    if (operation_option <= 2 && operation_option > 0)
+                    {
+                        Console.WriteLine("The result of the operation is: " + operation.DoOperation(operation_option, signal_name));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Option unavailable.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("There is no signal with this name and type.");
+                }
+
+            }
+            catch (FormatException) 
             {
-                operation.Signal_Operation = new Digital_Operations();
+                Console.WriteLine("Wrong value. Try again.");
+                do_operations();
             }
-            else
-            {
-                operation.Signal_Operation= new Analogic_Operations();
-            }
-
-            Console.WriteLine("Choose the operation to do:" +
-                "\n 1) Max value:" +
-                "\n 2) Average values: ");
-            operation_option = Convert.ToInt32(Console.ReadLine());
-
-           Console.WriteLine("The result of the operation is: "+operation.DoOperation(operation_option));
+           
 
         }
 

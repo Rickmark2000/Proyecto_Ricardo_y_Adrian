@@ -321,6 +321,37 @@ namespace Proyecto_Ricardo_y_Adrian
             return find;
         }
 
+        public bool check_repeated(string name,Signal_Type type)
+        {
+            int pos = 0;
+            string[] lines;
+            bool find = false;
+
+            if (File.Exists(file_Management.Path))
+            {
+                lines = File.ReadAllLines(file_Management.Path);
+
+                while (pos < lines.Length && !find)
+                {
+
+                    if (lines[pos].Contains($"{name}") && lines[pos].Contains($"{type}"))
+                    {
+                        find = true;
+                    }
+                    else
+                    {
+                        pos++;
+                    }
+                }
+            }
+            else
+            {
+                find = false;
+            }
+
+            return find;
+        }
+
         public Signal search_signal(string name)
         {
             Signal signal = null;

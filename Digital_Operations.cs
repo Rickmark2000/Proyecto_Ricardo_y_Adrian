@@ -8,14 +8,13 @@ namespace Proyecto_Ricardo_y_Adrian
 {
     public class Digital_Operations : ISignal_Operations
     {
-        public float average_values()
+        public float average_values(string signal_name)
         {
             return 0;
         }
 
-        public float max_value()
+        public float max_value(string signal_name)
         {
-            Console.WriteLine("Digital");
             return 0;
         }
         //necesario patron para los calculos

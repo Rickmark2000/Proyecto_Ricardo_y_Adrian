@@ -21,16 +21,16 @@ namespace Proyecto_Ricardo_y_Adrian
             this.signal_Operation = signal_Operation;
         }
 
-        public float DoOperation(int op)
+        public float DoOperation(int op, string signal_name)
         {
             float value = 0;
             switch (op)
             {
                 case 1:
-                    value = signal_Operation.max_value();
+                    value = signal_Operation.max_value(signal_name);
                     break;
                 case 2:
-                    value = signal_Operation.average_values();
+                    value = signal_Operation.average_values(signal_name);
                     break;
             }
             return value;
