@@ -75,9 +75,6 @@ namespace Proyecto_Ricardo_y_Adrian
 
         public Signal search_signal(string name)
         {
-            /*
-             * Decidamos si buscar en la lista o el fichero, sera importante type_use
-             */
             Signal signal_found = null;
 
             if (check_repeated(name))
@@ -90,8 +87,6 @@ namespace Proyecto_Ricardo_y_Adrian
                         signal_found = signal;
                     }
                 }
-                // Llamada a file, retorna una Lista con los Datos de esta Señal "name".
-                // search_signal = esa lista.
 
             }
             return signal_found;
